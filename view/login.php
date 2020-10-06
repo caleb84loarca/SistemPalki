@@ -1,8 +1,10 @@
 <?php 
-  include "../controllers/conexion.php"; 
+  include "../controllers/conexionsql2.php"; 
+  session_start();
+
  if (!empty($_POST['nombreusuario']) && !empty($_POST['password'])) {
-    
    
+
  }
 
  ?>
@@ -32,6 +34,8 @@
     <link href="view/css/custom.min.css" rel="stylesheet">
   </head>
 
+    <!-- inicio cuerpo de pagina -->
+
   <body class="login" style="background-image: url(view/images/fondos_palki/fondopalki4.jpg); background-size: cover; padding: 0; margin: 0;" >
 
     <div>
@@ -41,8 +45,8 @@
         <div class="animate form login_form">
           <section class="login_content">
 
-            <!-- formulario de login  view/pruebaconexion.php  controllers/conexion.php-->
-            <form action="controllers/conexion.php" method="post" class="form-horizontal"  role="form">
+            <!-- formulario de login  controllers/conexion.php-->
+            <form action="controllers/conexionsql.php" method="post" class="form-horizontal"  role="form">
               <h3>Control de Pedidos</h3>
 
               <div>                    
