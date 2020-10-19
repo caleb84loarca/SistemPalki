@@ -47,7 +47,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>Caleb Loarca</h2>
               </div>
             </div>
             <br>

@@ -1,32 +1,61 @@
 
 <?php
+		try{
+			$dbServidor = "C413BL04RK"; //Name of the server/instance, including optional port number (default is 1433)
+			$dbNombre = "prueba"; //Name of the database
+			$dbUsuario = "Admin_caleb"; //Name of the user
+			$dbContrasena = "admin123"; //DB Password of that user
 
-$server="C413BL04RK"; 
-$database="prueba"; 
-$user="Admin_caleb"; 
-$password="admin123"; 
+			//$conexion = new PDO("sqlsrv:Server=$dbServidor;Database=$dbNombre", $dbUsuario, $dbContrasena);
+			
+			$connectionInfo = array(
+				"Database" => $dbName, 
+				"UID" => $dbUser,
+				"PWD" => $dbPassword
+			);
 
-$cn=odbc_connect("Driver={SQL Server};Server=$server;Database=$database;", $user, $password); 
+			$conn = sqlsrv_connect($dbServidor, $connectionInfo);
 
-//tomamos los post del fromulario que seria para el login 
-$usuario = $_POST["nombreusuario"];
-$contrasena = $_POST["password"];
+		}catch (PDOException $e) {
+			 	
+			 	die("Error al conectar a SQL Server: ".$e->getMessage());
 
-echo var_dump($usuario);
-echo var_dump($contrasena);
-//la consulta para verificar si existe el usuario 
-//ejecutamos la consulta 
-$SQL=odbc_exec($cn,"select * from usuarios where usuario='".$usuario."' and contrasena='".$contrasena."'"); 
-//lo ejecutamos y lo pedidos que nos retorne los datos en array 
-$row= odbc_fetch_array($SQL); 
-//conteo de registro si ahi mas de 1 va a pasar 
-if (odbc_num_rows($SQL))
-{ 
-$data[estado]="ok"; 
-$_SESSION["id"]=$row["id"]; 
-$_SESSION["usuario"]=$row["usuario"]; 
-}
-else 
-{
-$data[estado]="error"; 
-} 
+			 } //cierra catch		
+
+if (empty($_POST["nombreusuario"]) || empty($_POST["password"]) )  {
+
+		print "<script>window.location='/sistempalki/index.php';</script>";
+
+	}else{		
+
+			echo "Felicidades, conecto a SQL SERVER";		
+			$usuario = $_POST["nombreusuario"];
+			$contrasena = $_POST["password"];
+
+			//$consulta= "select * from usuarios where usuario=".$usuario." and contrasena=".$contrasena;
+
+			$consulta="select usuario,contrasena from usuarios where usuario='".$usuario."' and contrasena='".$contrasena."'";
+
+
+			$query = sqlsrv_query($conexion, $consulta);			
+			
+
+			while ($fila = sqlsrv_fetch_array($query)) {
+				if ($fila['usuario']==$_POST['nombreusuario'] && $fila['contrasena']==$_POST['password']) { 		
+
+			//if( $query === false ) {
+			//if ($fila>0) {		
+				//header("location:../vistas/home.php");
+				print "<script> window.location='../view/home.php'; </script>";
+				
+			} else {
+					//header("location:../login.php");
+					print "<script> window.location='/sistempalki/index.php'; </script>";
+
+					
+				}
+		}
+	
+	sqlsrv_free_result($query);
+	sqlsrv_close($conexion);
+?>

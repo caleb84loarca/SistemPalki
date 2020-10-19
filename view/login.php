@@ -1,14 +1,3 @@
-<?php 
-  include "../controllers/conexionsql2.php"; 
-  session_start();
-
- if (!empty($_POST['nombreusuario']) && !empty($_POST['password'])) {
-   
-
- }
-
- ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="view/images/logo.png" />
    
-    <title>Pedidos | PALKI </title>
+    <title>Control Pedidos | PALKI </title>
    
     <!-- Bootstrap -->
     <link href="view/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +35,7 @@
           <section class="login_content">
 
             <!-- formulario de login  controllers/conexion.php-->
-            <form action="controllers/conexionsql.php" method="post" class="form-horizontal"  role="form">
+            <form action="controllers/conexionsql3.php" method="post" class="form-horizontal"  role="form">
               <h3>Control de Pedidos</h3>
 
               <div>                    
@@ -59,12 +48,12 @@
 
               <div>
                 <i class="fa fa-key"></i>
-                <input type="password" class="form-control" placeholder="Password" required="" name="password" pattern="([a-z])([A-Z]).{4,1}" />
+                <input type="password" class="form-control" placeholder="Password" required="" name="password" pattern="([a-z])([A-Z]){4,8})" title="Solo letras o numeros" />
               </div>
               <div>                
                   <button type="submit" class="btn btn-round btn-secondary">Acceder</button>  
 
-                  <a class="reset_pass" href="view/home.php">Olvido su password?</a>
+                  <a class="reset_pass" href="view/recuperar.php">Olvido su password?</a>
               </div>
 
               <div class="clearfix"></div>

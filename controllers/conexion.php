@@ -43,6 +43,4 @@
 				die('connection_aborted()'.$e);
 			}
 	
-	function conectarbd(){
-		return $conexion;
-	}
+	
