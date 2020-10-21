@@ -17,7 +17,7 @@ require_once  "plantilla/plantilla_central.php";
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Formulario</h2>
+                                    <h2>Formulario de Datos Personales</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -25,8 +25,8 @@ require_once  "plantilla/plantilla_central.php";
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-  <form class="" action="../model/UsuarioDatos.php" method="post" novalidate>             
-                <span class="section">Informacion Personal</span>
+  <form class="" action="../model/UsuarioDato.php" method="post" novalidate>             
+              
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Primer Nombre <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
@@ -73,7 +73,7 @@ require_once  "plantilla/plantilla_central.php";
                                          <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" type="tel" class='tel' name="telefono" required='required' data-validate-length-range="8,20" /></div>
+                                                <input class="form-control" type="tel" class='tel' name="telefono" required='required' /></div>
                                         </div>
                                        
                                         <div class="field item form-group">
@@ -100,7 +100,7 @@ require_once  "plantilla/plantilla_central.php";
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Usuario<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 
-                                            <select class="form-control" id="tipousuario" name="tipousuario">
+                                            <select class="form-control" id="tipousuario" name="tipousuario" required='required'>
                                             <option value="0"> Seleccionar de la lista </option>;
 
 <?php
@@ -115,16 +115,11 @@ require_once  "plantilla/plantilla_central.php";
       
        <option value="  <?php echo $valores['id_tipousuario'];?>"> <?php echo $valores['tipo_usuario'];?>  </option>';
      
-     <?php } ?>
-      
+     <?php } ?>      
  
   </select>
-
-
                                             </div>
                                         </div>
-
-
 
                                         <div class="ln_solid">
                                             <div class="form-group">

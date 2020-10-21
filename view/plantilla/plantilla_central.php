@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-En esp">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -139,9 +139,9 @@
                 <ul class=" navbar-right">                
              <?php
                         // Prints the day
-                        echo date("l") . ", ";
+                        echo "Guatemala ".date("l") . ", ";
                         // Prints the day, date, month, year, time, AM or PM
-                        echo date("d F Y");
+                        echo date("d F Y")." - Semana ".date("Wy")." -";
                           ?>
 
                       <li class="nav-item dropdown open" style="padding-left: 15px;">
@@ -173,7 +173,7 @@
           <div class="pull-right">
             Sistema Control Pedios -  <a href="#">Palki, S.A.</a>
           </div>
-          <div class="clearfix"></div>
+          <div class="clearfix">Caleb Loarca</div>
         </footer>
         <!-- /footer content -->
      

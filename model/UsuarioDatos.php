@@ -22,7 +22,6 @@ class UsuarioDatos {
 	public function add(){
 		$sql = "insert into `usuario`('nombre1','nombre2','apellido1','apellido2','puesto','contrasena','telefono','tipo_usario_id_tipousuario','ubicacion','email','telefono','fecha_ingreso')";
 		$sql .= "VALUES (\"$this->nombre1\",\"$this->nombre2\",\"$this->apellido1\",\"$this->apellido2\",\"$this->puesto\",\"$this->contrasena\",\"$this->tipo_usario_id_tipousuario\",\"$this->ubicacion\",\"$this->email\",,\"$this->telefono\",,\"$this->fecha_ingreso\")";
-
 		Executor::doit($sql);
 	}
 
