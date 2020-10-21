@@ -230,14 +230,8 @@ require_once  "plantilla/plantilla_central.php";
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
- 
+            
+            <hr/>
     
     <!-- Javascript functions -->
   <script>
@@ -287,6 +281,7 @@ require_once  "plantilla/plantilla_central.php";
     </script>
             
  <!-- /page content -->
-<!--PIE DE PAGINA DE PLANILLA-->
 
-<?php  //require_once  "plantilla/piedepagina.php"; ?>
+
+
+
