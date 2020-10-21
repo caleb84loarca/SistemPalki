@@ -10,7 +10,7 @@
                         // Prints the day
                         echo date("l") . ", ";
                         // Prints the day, date, month, year, time, AM or PM
-                        echo date("j F Y");
+                        echo date("d F Y");
                           ?>
               </span> 
             <b class="caret"></b>

@@ -29,24 +29,91 @@ require_once  "plantilla/plantilla_central.php";
   <form class="" action="" method="post" novalidate>             
                 <span class="section">Informacion del Producto</span>
                                         <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de Planta <span class="required">*</span></label>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Producto <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="ex. Yucca Guatemalensis" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="producto" placeholder="ex. Yucca Guatemalensis" required="required" />
                                             </div>
                                         </div>
                       <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre Comun<span class="required">*</span></label>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Categoria<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="ex. Izote" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="categoria" placeholder="ex. Izote" required="required" />
                                             </div>
                       </div>
-                                       
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de Ingreso<span class="required">*</span></label>
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">SubCategoria<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='date' type="date" name="date" required='required'></div>
-                                        </div>
-                                       
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="subcategoria" placeholder="ex. Izote" required="required" />
+                                            </div>
+                      </div>
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Genero<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="genero" placeholder="ex. Izote" required="required" />
+                                            </div>
+                      </div>
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre Cites<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="cites" placeholder="ex. Izote" required="required" />
+                                            </div>
+                      </div>
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Especie<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="especie" placeholder="ex. Izote" required="required" />
+                                            </div>
+                      </div>
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Cantidad Minima<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="cantidad_min" placeholder="ex. Izote" required="required" />
+                                            </div>
+                      </div>
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Semana en Transito<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="wktransito" placeholder="ex. Izote" required="required" />
+                                            </div>
+                      </div>
+
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Semna de Compra<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="wkcompra" placeholder="ex. Izote" required="required" />
+                                            </div>
+                      </div>
+
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Empaque<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+
+                                            <select class="form-control" id="idempaque" name="idpais">
+                                            <option value="0"> Seleccionar de la lista </option>;
+<?php
+    require_once "../controllers/BaseDatos.php"; 
+    $base = new BaseDatos();
+    $conexion=$base->getCon();                                              
+    $query = "select * from empaque";
+    $resultado = sqlsrv_query($conexion,$query);    
+    while ($valores = sqlsrv_fetch_array($resultado)) {
+      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
+      ?>      
+       <option value="  <?php echo $valores['id_empaque'];?>"> <?php echo $valores['id_empaque']." - ".$valores['tipo_empaque'];?>  </option>';
+     
+     <?php } ?>
+  </select>
+                                                </div>
+                         </div>
+
                                                                                   
                                         <div class="ln_solid">
                                             <div class="form-group">

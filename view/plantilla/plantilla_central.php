@@ -10,7 +10,6 @@
 
     <title>Palki, S.A. | Control Pedidos</title>
 
-
     <!-- Bootstrap -->
     <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -25,7 +24,6 @@
 
      <link rel="stylesheet" href="css/material-components-web.min.css">
  <link rel="stylesheet"  href="css/dataTables.material.min.css">
-  
 
   </head>
 
@@ -47,7 +45,23 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>Caleb Loarca</h2>
+                <h2> <?php                 
+                 
+                $nombre= $_POST['nombreusuario'];
+                $pass= $_POST['password'];
+
+                $sql = "SELECT * FROM usuario where nombre1='$nombre' and contrasena = '$pass'";
+
+                  if(($result = sqlsrv_query($conexion,$sql)) !== false){
+       
+                       while( $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ) {
+           
+                            echo $row['nombre1']." ".$row['apellido1'];          
+
+                        }        
+                   }             
+                
+                ?>  </h2>
               </div>
             </div>
             <br>
@@ -80,9 +94,10 @@
                   <li><a><i class="fa fa-cogs"></i> Mantenimiento <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
 
-                      <li><a href="new_usuario.php">Nuevo Usuario</a></li>             
-                      <li><a href="new_cliente.php">Nuevo Cliente</a></li>
-                      <li><a href="new_producto.php">Nuevo Producto</a></li>
+                      <li><a href="new_usuario.php">Usuarios</a></li>             
+                      <li><a href="new_cliente.php">Clientes</a></li>
+                      <li><a href="new_producto.php">Productos</a></li>
+                      <li><a href="new_empaque.php">Empaque</a></li>
                       
                     </ul>
                   </li>
@@ -121,15 +136,22 @@
                       <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
              <nav class="nav navbar-nav">
-                <ul class=" navbar-right">
+                <ul class=" navbar-right">                
+             <?php
+                        // Prints the day
+                        echo date("l") . ", ";
+                        // Prints the day, date, month, year, time, AM or PM
+                        echo date("d F Y");
+                          ?>
+
                       <li class="nav-item dropdown open" style="padding-left: 15px;">
                         <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                           <img src="images/logo.png" >John Doe
                         </a>
                         <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item"  href="javascript:;"> Profile</a>
+                          <a class="dropdown-item"  href="javascript:;"> Perfil</a>
                            
-                          <a class="dropdown-item"  href="../index.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                          <a class="dropdown-item"  href="../index.php"><i class="fa fa-sign-out pull-right"></i> Salir del Sistema</a>
                         </div>
                       </li>  
                  

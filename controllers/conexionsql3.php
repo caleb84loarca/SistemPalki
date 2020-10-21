@@ -11,23 +11,23 @@ if (!$conexion){
     die(print_r(sqlsrv_errors(), true)); 
 }else{   
 
-    echo "conexion exitosa!!";
-
+    
     $nombre= $_POST['nombreusuario'];
     $pass= $_POST['password'];
 
-    $sql = "SELECT * FROM usuarios where usuario='$nombre' and contrasena = '$pass'";
+    $sql = "SELECT * FROM usuario where nombre1='$nombre' and contrasena = '$pass'";
 
     if(($result = sqlsrv_query($conexion,$sql)) !== false){
        
         while( $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ) {
 
-            echo $row['usuario'].", ".$row['contrasena']."<br />";
+            echo "conexion exitosa!!";
+            echo $row['nombre1'].", ".$row['apellido1']."<br />";
             print "<script> window.location='../view/home.php'; </script>";
 
-        }
-        
+        }        
     }
+    echo "Usuario no encontrado, conexion fallida!!";
 
     print "<script> window.location='../index.php'; </script>";
 

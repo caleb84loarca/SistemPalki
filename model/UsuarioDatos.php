@@ -4,24 +4,24 @@ class UsuarioDatos {
 
 
 	public function UsuarioDatos(){
-		$this->idusuario = "";
-		$this->primernombre = "";
-		$this->segundonombre = "";
-		$this->primerapellido = "";
-		$this->segundoapellido = "";
-		$this->puesto = "";
-		$this->correo = "";
-		$this->telefono = "";
-		$this->fechaingreso = "";		
-		$this->nombreusuario = "";
-		$this->password = "";
-				
+		
+		$this->nombre1 = "$_POST['nombre1']";
+		$this->nombre2 = "$_POST['nombre2']";
+		$this->apellido1 = "$_POST['apellido1']";
+		$this->apellido2 = "$_POST['apellido2']";
+		$this->puesto = "$_POST['puesto']";
+		$this->contrasena = "$_POST['contrasena']";
+		$this->tipo_usario_id_tipousuario = "$_POST['tipousuario']";	
+		$this->ubicacion = "$_POST['ubicacion']";
+		$this->email = "$_POST['email']";
+		$this->telefono = "$_POST['telefono']";	
+		$this->fecha_ingreso = "$_POST['fechaingreso']";		
+					
 	}
 
 	public function add(){
-		$sql = "insert into `usuario`(
-'primernombre','segundonombre','primerapellido','segundoapellido','puesto','correo','telefono','fechaingreso','nombreusuario','password')";
-		$sql .= "VALUES (\"$this->primernombre\",\"$this->segundonombre\",\"$this->primerapellido\",\"$this->segundoapellido\",\"$this->puesto\",\"$this->correo\",\"$this->telefono\",\"$this->fechaingreso\",\"$this->nombreusuario\",\"$this->password\")";
+		$sql = "insert into `usuario`('nombre1','nombre2','apellido1','apellido2','puesto','contrasena','telefono','tipo_usario_id_tipousuario','ubicacion','email','telefono','fecha_ingreso')";
+		$sql .= "VALUES (\"$this->nombre1\",\"$this->nombre2\",\"$this->apellido1\",\"$this->apellido2\",\"$this->puesto\",\"$this->contrasena\",\"$this->tipo_usario_id_tipousuario\",\"$this->ubicacion\",\"$this->email\",,\"$this->telefono\",,\"$this->fecha_ingreso\")";
 
 		Executor::doit($sql);
 	}

@@ -53,7 +53,7 @@
               <div>                
                   <button type="submit" class="btn btn-round btn-secondary">Acceder</button>  
 
-                  <a class="reset_pass" href="view/recuperar.php">Olvido su password?</a>
+                  <a class="reset_pass" href="../sistempalki/error404.php">Olvido su password?</a>
               </div>
 
               <div class="clearfix"></div>

@@ -25,30 +25,30 @@ require_once  "plantilla/plantilla_central.php";
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-  <form class="" action="" method="post" novalidate>             
+  <form class="" action="../model/UsuarioDatos.php" method="post" novalidate>             
                 <span class="section">Informacion Personal</span>
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Primer Nombre <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="ex. John" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="nombre1" placeholder="ex. John" required="required" />
                                             </div>
                                         </div>
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Segundo Nombre<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="ex. John" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="nombre2" placeholder="ex. John" required="required" />
                                             </div>
                       </div>
                                          <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Primer Apellido <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="ex. Kennedy" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="apellido1" placeholder="ex. Perez" required="required" />
                                             </div>
                                         </div>
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Segundo Apellido<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="name" placeholder="ex. Kennedy" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="apellido2" placeholder="ex. Sosa" required="required" />
                                             </div>
                       </div>
                                         
@@ -56,12 +56,12 @@ require_once  "plantilla/plantilla_central.php";
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Puesto<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='optional' name="occupation" placeholder="Venta local" data-validate-length-range="5,15" type="text" /></div>
+                                                <input class="form-control" class='optional' name="puesto" placeholder="Venta local" data-validate-length-range="5,15" type="text" /></div>
                                         </div>
                                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Ubicacion<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='optional' name="occupation"  placeholder="Finca Izotera" data-validate-length-range="5,20" type="text" /></div>
+                                                <input class="form-control" class='optional' name="ubicacion"  placeholder="Finca Izotera" data-validate-length-range="5,20" type="text" /></div>
                                         </div>
 
                                         <div class="field item form-group">
@@ -73,26 +73,20 @@ require_once  "plantilla/plantilla_central.php";
                                          <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" type="tel" class='tel' name="phone" required='required' data-validate-length-range="8,20" /></div>
+                                                <input class="form-control" type="tel" class='tel' name="telefono" required='required' data-validate-length-range="8,20" /></div>
                                         </div>
                                        
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de Ingreso<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='date' type="date" name="date" required='required'></div>
+                                                <input class="form-control" class='date' type="date" name="fechaingreso" required='required'></div>
                                         </div>
                                        
-                                         <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de Usuario <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John" required="required" />
-                                            </div>
-                                        </div>
-
+                                        
                                         <div class="field item form-group">
                       <label class="col-form-label col-md-3 col-sm-3  label-align">Password<span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6">
-                        <input class="form-control" type="password" id="password1" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}" title="Minimum 8 Characters Including An Upper And Lower Case Letter, A Number And A Unique Character" required />
+                        <input class="form-control" type="password" id="password1" name="contrasena" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}" title="Minimum 8 Characters Including An Upper And Lower Case Letter, A Number And A Unique Character" required />
                         
                         <span style="position: absolute;right:15px;top:7px;" onclick="hideshow()" >
                           <i id="slash" class="fa fa-eye-slash"></i>
@@ -101,6 +95,37 @@ require_once  "plantilla/plantilla_central.php";
                       </div>
                     </div>                                     
                                        
+
+                    <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Usuario<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+
+                                            <select class="form-control" id="tipousuario" name="tipousuario">
+                                            <option value="0"> Seleccionar de la lista </option>;
+
+<?php
+    require_once "../controllers/BaseDatos.php"; 
+    $base = new BaseDatos();
+    $conexion=$base->getCon();                                              
+    $query = "select * from tipo_usuario";
+    $resultado = sqlsrv_query($conexion,$query);    
+    while ($valores = sqlsrv_fetch_array($resultado)) {
+      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
+      ?>
+      
+       <option value="  <?php echo $valores['id_tipousuario'];?>"> <?php echo $valores['tipo_usuario'];?>  </option>';
+     
+     <?php } ?>
+      
+ 
+  </select>
+
+
+                                            </div>
+                                        </div>
+
+
+
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">

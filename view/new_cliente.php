@@ -32,68 +32,110 @@ require_once  "plantilla/plantilla_central.php"; ?>
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Primer Nombre <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="clien_nom1" placeholder="ex. John" required="required" />
                                             </div>
                                         </div>
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Segundo Nombre<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="clien_nom2" placeholder="ex. John" required="required" />
                                             </div>
                       </div>
                                          <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Primer Apellido <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. Kennedy" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="clien_ape1" placeholder="ex. Kennedy" required="required" />
                                             </div>
                                         </div>
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Segundo Apellido<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. Kennedy" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="clien_ape2" placeholder="ex. Kennedy" required="required" />
                                             </div>
                       </div>
+
+                      <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de la Compañia<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" class='optional' name="compania"  placeholder="ex. Akker Exotic" data-validate-length-range="5,15" type="text" /></div>
+                                        </div>
+
+
                                         
                                     <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Direccion<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='optional' name="occupation"  placeholder="Finca Izotera" data-validate-length-range="5,15" type="text" /></div>
+                                                <input class="form-control" class='optional' name="direccion"  placeholder="Finca Izotera" data-validate-length-range="5,15" type="text" /></div>
                                         </div>
-
-
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Pais<span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='optional' name="occupation" placeholder="Venta local" data-validate-length-range="5,15" type="text" /></div>
-                                        </div>
-                                      
 
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">email<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
                                                  <input class="form-control" type="email" class='email' name="email" data-validate-linked='email' required='required'></div>
                                         </div>
+
+
+                                                                      
+
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Pais<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+
+                                            <select class="form-control" id="idpais" name="idpais">
+                                            <option value="0"> Seleccionar de la lista </option>;
+
+<?php
+    require_once "../controllers/BaseDatos.php"; 
+    $base = new BaseDatos();
+    $conexion=$base->getCon();                                              
+    $query = "select * from pais";
+    $resultado = sqlsrv_query($conexion,$query);    
+    while ($valores = sqlsrv_fetch_array($resultado)) {
+      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
+      ?>
+      
+       <option value="  <?php echo $valores['id_pais'];?>"> <?php echo $valores['id_pais']." - ".$valores['nombre_pais'];?>  </option>';
+     
+     <?php } ?>
+      
+ 
+  </select>
+
+
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        
                                        
                                          <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone 1<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" type="tel" class='tel' name="phone" required='required' data-validate-length-range="8,20" /></div>
+                                                <input class="form-control" type="tel" class='tel' name="telefono1" required='required' data-validate-length-range="8,20" /></div>
                                         </div>
                                        
                                         <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone 2<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" type="tel" class='tel' name="telefono2"  data-validate-length-range="8,20" /></div>
+                                        </div>
+
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone 3<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" type="tel" class='tel' name="telefono3"  data-validate-length-range="8,20" /></div>
+                                        </div>
+
+                                        <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de Ingreso<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='date' type="date" name="date" required='required'></div>
+                                                <input class="form-control" class='date' type="date" name="fechaingreso" required='required'></div>
                                         </div>
                                        
-                                         <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de Usuario <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="ex. John" required="required" />
-                                            </div>
-                                        </div>
-   
-                                 
+                                                                        
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">

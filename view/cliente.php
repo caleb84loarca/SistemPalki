@@ -12,9 +12,6 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12" align="center">
                             <div class="x_panel">
-                                
-                                
-
 
 <table id="tbclientes" class="mdl-data-table" style="width:100%">
         <thead>

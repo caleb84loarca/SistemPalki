@@ -1,4 +1,4 @@
-<?php require_once "plantilla/plantilla_central.php"; ?>
+<?php require_once "/view/plantilla/plantilla_central.php"; ?>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">

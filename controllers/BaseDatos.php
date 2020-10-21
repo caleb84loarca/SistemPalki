@@ -11,7 +11,7 @@ class BaseDatos {
 	function connect(){
 	
 		$dbServidor = "localhost"; //Name of the server/instance, including optional port number (default is 1433)
-		$dbName = "prueba"; //Name of the database
+		$dbName = "dbsistempalki"; //Name of the database
 		$dbUser = "Admin_caleb"; //Name of the user
 		$dbPassword = "admin123"; //DB Password of that user		
 
