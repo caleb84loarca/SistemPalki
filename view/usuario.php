@@ -1,9 +1,4 @@
-<?php 
-require_once  "plantilla/plantilla_central.php"; 
-require_once  "controllers/BaseDatos.php"; 
-require_once  "model/UsuarioDatos.php"; 
-
-?> 
+<?php require_once  "plantilla/plantilla_central.php"; ?> 
 
 <div class="right_col" role="main">
                 <div class="">
@@ -16,55 +11,59 @@ require_once  "model/UsuarioDatos.php";
 
                     <div class="row">
                         <div class="col-md-12 col-sm-12" align="center">
-                            <div class="x_panel">                                             
+                            <div class="x_panel">
 
-<table id="tbusuario" class="mdl-data-table" style="width:100%">
-        <thead class="text-center">
+<table id="tbusuarios" class="mdl-data-table" style="width:100%">
+        <thead>
             <tr>
-                <th>Id Usuario</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Puestos</th>
-                <th>Correo</th>
-                <th>Telefono</th>
+                <th>TIPO DE USUARIO</th>
+                <th>NOMBRES</th>
+                <th>APELLIDOS</th>
+                <th>PUESTO</th>
+                <th>FINCA</th>
+                <th>CORREO ELECTRONICO</th>
+                <th>TELEFONO</th>
+                <th>FECHA DE INGRESO</th>
             </tr>
         </thead>
-        
         <tbody>
 
-            <?php 
-                $con = new BaseDatos();
-                $conexion = $con->Conectarbd();
+<?php 
+require_once "../controllers/BaseDatos.php";
 
-                $sql = "Select * from usuario";
+$conexion =BaseDatos::getCon();
 
-                $resultado = $conexion->prepare($sql);
-                $resultado->execute();
-                $usuarios = $resultado->fetchALL(PDO::FETCH_ASSOC);
+$sql = "Select t.tipo_usuario, concat(u.nombre1,' ',u.nombre2) as Nombres, concat(u.apellido1,' ',u.apellido2) as Apellidos, u.puesto,u.ubicacion, u.email,u.telefono, u.fecha_ingreso  from usuario as u
+inner join tipo_usuario as t on t.id_tipousuario=u.tipo_usario_id_tipousuario";
 
-                
-                foreach ($usuarios as $usuario) {                        
-           
-         ?>
+$resultado= sqlsrv_query($conexion,$sql);
+
+while($fila = sqlsrv_fetch_array($resultado)){
+
+?>
             <tr>
-                <td><?php echo $usuario['idsuario']; ?></td>
-                <td><?php echo $usuario['primernombre']." ".$mostrar['segundonombre']; ?></td>
-                <td><?php echo $usuario['primerapellido']." ".$mostrar['segundoapellido']; ?></td>
-                <td><?php echo $usuario['puesto']; ?></td>
-                <td><?php echo $usuario['correo']; ?></td>
-                <td><?php echo $usuario['telefono']; ?></td>
+                <td> <?php echo $fila['tipo_usuario'];?> </td>
+                <td><?php echo $fila['Nombres'];?></td>
+                <td><?php echo $fila['Apellidos'];?></td>
+                <td><?php echo $fila['puesto'];?></td>
+                <td><?php echo $fila['ubicacion'];?></td>
+                <td> <?php echo $fila['email'];?></td>
+                <td> <?php echo $fila['telefono'];?></td>
+                <td> <?php echo $fila['fecha_ingreso'];?></td>
             </tr>
-        <?php } ?>
 
+            <?php }; ?>          
         </tbody>
         <tfoot>
             <tr>
-                <th>Id Usuario</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Puestos</th>
-                <th>Correo</th>
-                <th>Telefono</th>
+                <th>TIPO DE USUARIO</th>
+                <th>NOMBRES</th>
+                <th>APELLIDOS</th>
+                <th>PUESTO</th>
+                <th>FINCA</th>
+                <th>CORREO ELECTRONICO</th>
+                <th>TELEFONO</th>
+                <th>FECHA DE INGRESO</th>
             </tr>
         </tfoot>
     </table>
@@ -76,7 +75,7 @@ require_once  "model/UsuarioDatos.php";
            
             <script>
                 $(document).ready(function() {
-                $('#tbusuario').DataTable( {
+                $('#tbusuarios').DataTable( {
                     autoWidth: false,
                     columnDefs: [
                         {
@@ -95,4 +94,3 @@ require_once  "model/UsuarioDatos.php";
                     </div>
                 </div>
             </div>
-<div class="ln_solid"></div>
