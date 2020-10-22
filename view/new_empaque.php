@@ -100,7 +100,7 @@ require_once  "plantilla/plantilla_central.php";
             $query = "select * from empaque";
             $resultado = sqlsrv_query($conexion,$query);  
 
-            while ($fila = sqlsrv_fetch_array($resultado)) {
+            while ($fila = sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC)) {
             ?>
         <tr>
             <td> <?php echo $fila['id_empaque'];  ?> </td>

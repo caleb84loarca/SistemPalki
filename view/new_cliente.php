@@ -27,30 +27,30 @@ require_once  "plantilla/plantilla_central.php"; ?>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-  <form class="" action="" method="post" novalidate>             
+  <form class="" action="../model/clientedatos.php" method="post" novalidate>             
                 <span class="section">Informacion Personal</span>
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Primer Nombre <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="clien_nom1" placeholder="ex. John" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="clien_nom1" placeholder="ex. John" required="required" />
                                             </div>
                                         </div>
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Segundo Nombre<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="clien_nom2" placeholder="ex. John" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="clien_nom2" placeholder="ex. John" required="required" />
                                             </div>
                       </div>
                                          <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Primer Apellido <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="clien_ape1" placeholder="ex. Kennedy" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="clien_ape1" placeholder="ex. Kennedy" required="required" />
                                             </div>
                                         </div>
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Segundo Apellido<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="2" name="clien_ape2" placeholder="ex. Kennedy" required="required" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="clien_ape2" placeholder="ex. Kennedy" required="required" />
                                             </div>
                       </div>
 
@@ -114,7 +114,7 @@ require_once  "plantilla/plantilla_central.php"; ?>
                                          <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone 1<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" type="tel" class='tel' name="telefono1" required='required' data-validate-length-range="8,20" /></div>
+                                                <input class="form-control" type="tel" class='tel' name="telefono1" required='required' /></div>
                                         </div>
                                        
                                         <div class="field item form-group">

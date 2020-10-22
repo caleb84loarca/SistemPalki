@@ -1,6 +1,7 @@
 <!--ENCABEZADO DE PLANILLA-->
 <?php 
 require_once  "plantilla/plantilla_central.php"; 
+require_once "../controllers/BaseDatos.php"; 
 ?> 
 
  <!-- page content -->
@@ -18,7 +19,7 @@ require_once  "plantilla/plantilla_central.php";
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Formulario</h2>
+                                    <h2>Formulario Informaci&oacuten del Producto</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -26,8 +27,8 @@ require_once  "plantilla/plantilla_central.php";
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-  <form class="" action="" method="post" novalidate>             
-                <span class="section">Informaci&oacuten del Producto</span>
+  <form class="" action="../model/ProductoDatos.php" method="post" novalidate>             
+               
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Producto <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
@@ -96,10 +97,10 @@ require_once  "plantilla/plantilla_central.php";
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Empaque<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 
-                                            <select class="form-control" id="idempaque" name="idpais">
+                                            <select class="form-control" id="idempaque" name="idempaque">
                                             <option value="0"> Seleccionar de la lista </option>;
 <?php
-    require_once "../controllers/BaseDatos.php"; 
+    
     $base = new BaseDatos();
     $conexion=$base->getCon();                                              
     $query = "select * from empaque";
@@ -135,101 +136,7 @@ require_once  "plantilla/plantilla_central.php";
 
 
 
-
-
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>Listado de Productos Actuales</h3>
-                        </div>                        
-                    </div>
-                    <div class="clearfix"></div>
-
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12" align="center">
-                            <div class="x_panel">
-
-                            <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Tabla de Datos</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-
-<table id="tbempaque" class="mdl-data-table" style="width:100%">
-        <thead>
-            <tr>
-                <th>EMPAQUES No.</th>
-                <th>EMPAQUES ACTIVOS</th>   
-                <th>ACTUALIZACIONES</th>              
-               
-            </tr>
-        </thead>
-        <tbody>
            
-        <?php 
-            require_once "../controllers/BaseDatos.php"; 
-            $base = new BaseDatos();
-            $conexion=$base->getCon();   
-            $query = "select * from empaque";
-            $resultado = sqlsrv_query($conexion,$query);  
-
-            while ($fila = sqlsrv_fetch_array($resultado)) {
-            ?>
-        <tr>
-            <td> <?php echo $fila['id_empaque'];  ?> </td>
-            <td> <?php echo $fila['tipo_empaque'];  ?> </td>  
-<td>          
-<a href="#" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
-<a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>
-</td>
-        </tr>
-        <?php  };?>                       
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>EMPAQUES No.</th>
-                <th>EMPAQUES ACTIVOS</th>   
-                <th>ACTUALIZACIONES</th>                
-               
-            </tr>
-        </tfoot>
-    </table>
-
-            <!-- script de tabla-->
-
-            <script src="js/jquery.dataTables.min.js"></script>
-            <script src="js/dataTables.material.min.js"></script>
-           
-            <script>
-            
-                $(document).ready(function() {
-                $('#tbempaque').DataTable( {                   
-                    autoWidth: false,
-                    columnDefs: [
-                        {
-                            targets: ['_all'],
-                            className: 'mdc-data-table__cell'                          
-                        }
-                    ]
-                } );
-            } );
-            </script>
-            <!-- cierre script de tabla-->
-
-                           
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
             <hr/>
     
@@ -279,7 +186,11 @@ require_once  "plantilla/plantilla_central.php";
         }).prop('checked', false);
 
     </script>
-            
+
+
+
+            <!-- nueva tabla para modificar-->
+
  <!-- /page content -->
 
 

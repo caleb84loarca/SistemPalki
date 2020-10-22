@@ -46,7 +46,8 @@
               <div class="profile_info">
                 <span>Welcome,</span>
                 <h2> <?php                 
-                 
+                 require_once "../controllers/BaseDatos.php";
+                 $conexion=BaseDatos::getCon();
                 $nombre= $_POST['nombreusuario'];
                 $pass= $_POST['password'];
 
@@ -78,7 +79,7 @@
                     <ul class="nav child_menu">
                       <li><a href="./?./?index.html">Vista Principal <i class="fa fa-dashboard" ></i></a></li>
                       <li><a href="./?index2.html">Dashboard2</a></li>
-                      <li><a href="./?index3.html">Dashboard3</a></li>
+                      <li><a href="new_orden.php">Ingresar Ordenes <i class="fa fa-shopping-cart"></i> </a></li>
                     </ul>
                   </li>
                   
@@ -86,6 +87,7 @@
                     <ul class="nav child_menu">
                       <li><a href="usuario.php">Usuarios  <i class="fa fa-users"></i></a>  </li>
                       <li><a href="Cliente.php">Clientes <i class="fa fa-smile-o" ></i> </a></li>
+                      <li><a href="productos.php">Productos <i class="fa fa-smile-o" ></i> </a></li>
                      
                      
                     </ul>
