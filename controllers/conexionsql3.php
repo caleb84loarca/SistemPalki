@@ -23,6 +23,10 @@ if (!$conexion){
 
             echo "conexion exitosa!!";
             echo $row['nombre1'].", ".$row['apellido1']."<br />";
+
+            session_start();
+            $nombre=$_SESSION[$row['nombre1']];
+            $apellido=$_SESSION[$row['apellido1']];
             print "<script> window.location='../view/home.php'; </script>";
 
         }        

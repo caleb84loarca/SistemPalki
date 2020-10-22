@@ -1,5 +1,6 @@
 <!--ENCABEZADO DE PLANILLA-->
-<?php require_once "plantilla/plantilla_central.php"; ?>
+<?php require_once "plantilla/plantilla_central.php";
+session_start(); ?>
 
 
         <!-- page content -->
@@ -8,7 +9,7 @@
           <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                <span><?php
                         // Prints the day
-                        echo date("l") . ", ";
+                        echo "Guatemala ".date("l") . ", ";
                         // Prints the day, date, month, year, time, AM or PM
                         echo date("d F Y");
                           ?>

@@ -18,6 +18,9 @@
     <link href="plugins/nprogress/nprogress.css" rel="stylesheet">
     <!-- jQuery custom content scroller -->
     <link href="plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+     <!-- FullCalendar -->
+     <link href="plugins/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="plugins/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
 
     <!-- principal Theme Style -->
     <link href="css/custom.min.css" rel="stylesheet">
@@ -46,21 +49,9 @@
               <div class="profile_info">
                 <span>Welcome,</span>
                 <h2> <?php                 
-                 require_once "../controllers/BaseDatos.php";
-                 $conexion=BaseDatos::getCon();
-                $nombre= $_POST['nombreusuario'];
-                $pass= $_POST['password'];
+                session_start();
 
-                $sql = "SELECT * FROM usuario where nombre1='$nombre' and contrasena = '$pass'";
-
-                  if(($result = sqlsrv_query($conexion,$sql)) !== false){
-       
-                       while( $row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC) ) {
-           
-                            echo $row['nombre1']." ".$row['apellido1'];          
-
-                        }        
-                   }             
+                echo $nombre;
                 
                 ?>  </h2>
               </div>
@@ -78,7 +69,7 @@
                   <li><a><i class="fa fa-home"></i> Inicio </a>
                     <ul class="nav child_menu">
                       <li><a href="./?./?index.html">Vista Principal <i class="fa fa-dashboard" ></i></a></li>
-                      <li><a href="./?index2.html">Dashboard2</a></li>
+                      <li><a href="despacho_orden.php">Despacho Ordenes <i class="fa fa-send-o"></i>  </a> </li>
                       <li><a href="new_orden.php">Ingresar Ordenes <i class="fa fa-shopping-cart"></i> </a></li>
                     </ul>
                   </li>
@@ -87,7 +78,7 @@
                     <ul class="nav child_menu">
                       <li><a href="usuario.php">Usuarios  <i class="fa fa-users"></i></a>  </li>
                       <li><a href="Cliente.php">Clientes <i class="fa fa-smile-o" ></i> </a></li>
-                      <li><a href="productos.php">Productos <i class="fa fa-smile-o" ></i> </a></li>
+                      <li><a href="productos.php">Productos <i class="fa fa-pagelines" ></i> </a></li>
                      
                      
                     </ul>
@@ -190,6 +181,8 @@
     <script src="plugins/nprogress/nprogress.js"></script>
     <!-- jQuery custom content scroller -->
     <script src="plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+      <!-- jQuery Smart Wizard -->
+      <script src="plugins/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="js/custom.min.js"></script>
