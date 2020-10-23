@@ -31,6 +31,7 @@ function aniadir($producto,$categoria,$genero,$subcategoria,$cites,$especie,$can
     return $resultado;
 }
 
+//metodo para mostrar los productos
 
 function mostrarproducto($id_producto){
     $conn = BaseDatos::getCon();
@@ -57,19 +58,19 @@ function mostrarproducto($id_producto){
 //datos para actualizar productos
 
 $idprod=$_POST['idproducto'];
-$product=$_POST['producto']; 
-$catego=$_POST['categoria']; 
-$gene=$_POST['genero']; 
-$espe=$_POST['especie'];
-$subcatego=$_POST['subcategoria']; 
-$cite=$_POST['cites'];     
-$cant_min=$_POST['cantidad_min']; 
-$wktransit=$_POST['wktransito']; 
-$wkcompras=$_POST['wkcompra']; 
-$idempaques=$_POST['idempaque']; 
+$product=$_POST['product']; 
+$catego=$_POST['catego']; 
+$gene=$_POST['gene']; 
+$espe=$_POST['especies'];
+$subcatego=$_POST['subcatego']; 
+$cite=$_POST['cite'];     
+$cant_min=$_POST['cant_min']; 
+$wktransit=$_POST['wktransitos']; 
+$wkcompras=$_POST['wkcompras']; 
+$idempaques=$_POST['idempaques']; 
    
 
-if( isset($producto) && isset($idempaque) ){
+if( isset($product) && isset($idempaques) ){
 
    actualizarproducto($product,$catego,$gene,$espe,$subcatego,$cite,$cant_min,$wktransit,$wkcompras,$idempaques,$idprod);   
    print "<script> alert('Datos Actualizados Exitosamente!!'); window.location='../view/productos.php'; </script>";

@@ -33,60 +33,60 @@ $mostrar = mostrarproducto($_GET['id']);
                                 <div class="x_content">
   <form class="" action="../model/ProductoDatos.php" method="post" novalidate>             
     
-  <input class="hidden"  name="idproducto" value="<?php echo $mostrar[0]; ?>" />
+  <input type="hidden"   name="idproducto" value="<?php echo $mostrar[0]; ?>" />
 
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Producto <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="producto" value="<?php echo $mostrar[1]; ?>" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="product" value="<?php echo $mostrar[1]; ?>" />
                                             </div>
                                         </div>
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Categoria<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="categoria" value="<?php echo $mostrar[2]; ?>" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="catego" value="<?php echo $mostrar[2]; ?>" />
                                             </div>
                       </div>
 
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">SubCategoria<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-words="1" name="subcategoria" value="<?php echo $mostrar[5];?>" />
+                                                <input class="form-control" data-validate-words="1" name="subcatego" value="<?php echo $mostrar[5];?>" />
                                             </div>
                       </div>
 
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Genero<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="genero" value="<?php echo $mostrar[3]; ?>" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="gene" value="<?php echo $mostrar[3]; ?>" />
                                             </div>
                       </div>
 
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre Cites<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="cites" value="<?php echo $mostrar[6]; ?>" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="cite" value="<?php echo $mostrar[6]; ?>" />
                                             </div>
                       </div>
 
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Especie<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="especie" value="<?php echo $mostrar[4]; ?>" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="especies" value="<?php echo $mostrar[4]; ?>" />
                                             </div>
                       </div>
 
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Cantidad Minima<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="cantidad_min" value="<?php echo $mostrar[7]; ?>" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="cant_min" value="<?php echo $mostrar[7]; ?>" />
                                             </div>
                       </div>
 
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Semana en Transito<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="wktransito" value="<?php echo $mostrar[8]; ?>" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="wktransitos" value="<?php echo $mostrar[8]; ?>" />
                                             </div>
                       </div>
 
@@ -94,7 +94,7 @@ $mostrar = mostrarproducto($_GET['id']);
                       <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Semana de Compra<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="wkcompra" value="<?php echo $mostrar[9]; ?>" />
+                                                <input class="form-control" data-validate-length-range="6" data-validate-words="1" name="wkcompras" value="<?php echo $mostrar[9]; ?>" />
                                             </div>
                       </div>
 
@@ -103,7 +103,7 @@ $mostrar = mostrarproducto($_GET['id']);
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Tipo de Empaque<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 
-                                            <select class="form-control" id="idempaque" name="idempaque">
+                                            <select class="form-control" id="idempaque" name="idempaques">
                                             <option value="0"> Seleccionar de la lista </option>;
 <?php
     
