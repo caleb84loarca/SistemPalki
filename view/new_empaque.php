@@ -1,6 +1,9 @@
 <!--ENCABEZADO DE PLANILLA-->
 <?php 
 require_once  "plantilla/plantilla_central.php"; 
+require_once "../controllers/BaseDatos.php"; 
+require_once "../model/EmpaqueDatos.php";
+            
 session_start();
 ?> 
 
@@ -29,12 +32,12 @@ session_start();
                                 <div class="x_content">
   <form class="" action="../model/EmpaqueDatos.php" method="post" novalidate>             
                
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de Empaque <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" data-validate-length-range="10" data-validate-words="1" name="empaque" placeholder="ex. Trolley" required="required" />
-                                            </div>
-                                        </div>
+                  <div class="field item form-group">
+                      <label class="col-form-label col-md-3 col-sm-3  label-align">Nombre de Empaque <span class="required">*</span></label>
+                         <div class="col-md-6 col-sm-6">
+                           <input class="form-control" data-validate-words="1" name="empaque" placeholder="ex. Trolley" required="required" />
+                         </div>
+                   </div>
 
                                                                                   
                                         <div class="ln_solid">
@@ -86,18 +89,17 @@ session_start();
 <table id="tbempaque" class="mdl-data-table" style="width:100%">
         <thead>
             <tr>
-                <th>EMPAQUES No.</th>
+                <th>ID EMPAQUE</th>
                 <th>EMPAQUES ACTIVOS</th>   
-                <th>ACTUALIZACIONES</th>              
+                <th>ACCIONES</th>              
                
             </tr>
         </thead>
         <tbody>
            
         <?php 
-            require_once "../controllers/BaseDatos.php"; 
-            $base = new BaseDatos();
-            $conexion=$base->getCon();   
+            
+            $conexion=BaseDatos::getCon();   
             $query = "select * from empaque";
             $resultado = sqlsrv_query($conexion,$query);  
 
@@ -105,19 +107,19 @@ session_start();
             ?>
         <tr>
             <td> <?php echo $fila['id_empaque'];  ?> </td>
-            <td> <?php echo $fila['tipo_empaque'];  ?> </td>  
+            <td> <?php echo $fila['tipo_empaque'];  ?> </td>              
 <td>          
-<a href="#" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
-<a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>
+<a href="modif_empaque.php?id=<?php echo $fila['id_empaque']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true" >Modificar</a>
+ <!-- <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>  -->
 </td>
         </tr>
         <?php  };?>                       
         </tbody>
         <tfoot>
             <tr>
-                <th>EMPAQUES No.</th>
+                <th>ID EMPAQUE</th>
                 <th>EMPAQUES ACTIVOS</th>   
-                <th>ACTUALIZACIONES</th>                
+                <th>ACCIONES</th>                
                
             </tr>
         </tfoot>

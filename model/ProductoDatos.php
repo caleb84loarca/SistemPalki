@@ -31,4 +31,63 @@ function aniadir($producto,$categoria,$genero,$subcategoria,$cites,$especie,$can
     return $resultado;
 }
 
+
+function mostrarproducto($id_producto){
+    $conn = BaseDatos::getCon();
+    $sql = "Select * from producto where id_producto='".$id_producto."'; ";
+    $resultado = sqlsrv_query($conn,$sql) or die(sqlsrv_error()); 
+    $fila = sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC);
+       
+    return [
+        $fila['id_producto'],
+        $fila['producto'],
+        $fila['categoria'],
+        $fila['genero'],
+        $fila['especie'],
+        $fila['sub_categoria'],
+        $fila['cites_descripcion'],
+        $fila['cant_minima'],
+        $fila['wk_transito'],
+        $fila['wk_compra'],
+        $fila['empaque_id_empaque']
+        
+    ];
+}  
+
+//datos para actualizar productos
+
+$idprod=$_POST['idproducto'];
+$product=$_POST['producto']; 
+$catego=$_POST['categoria']; 
+$gene=$_POST['genero']; 
+$espe=$_POST['especie'];
+$subcatego=$_POST['subcategoria']; 
+$cite=$_POST['cites'];     
+$cant_min=$_POST['cantidad_min']; 
+$wktransit=$_POST['wktransito']; 
+$wkcompras=$_POST['wkcompra']; 
+$idempaques=$_POST['idempaque']; 
+   
+
+if( isset($producto) && isset($idempaque) ){
+
+   actualizarproducto($product,$catego,$gene,$espe,$subcatego,$cite,$cant_min,$wktransit,$wkcompras,$idempaques,$idprod);   
+   print "<script> alert('Datos Actualizados Exitosamente!!'); window.location='../view/productos.php'; </script>";
+}
+
+
+
+
+function actualizarproducto($product,$catego,$gene,$espe,$subcatego,$cite,$cant_min,$wktransit,$wkcompras,$idempaques,$idprod){
+
+    $conn = BaseDatos::getCon();
+    $sql = "update producto set producto='".$product."', categoria='".$catego."', genero='".$gene."', especie='".$espe."',sub_categoria='".$subcatego."',cites_descripcion='".$cite."',cant_minima=".$cant_min.", wk_transito=".$wktransit.", wk_compra=".$wkcompras.", empaque_id_empaque=".$idempaques."
+    where id_producto=".$idprod;
+    $resultado = sqlsrv_query($conn,$sql) or die(sqlsrv_error()); 
+    return $resultado;
+
+    }   
+
+
+
 ?>

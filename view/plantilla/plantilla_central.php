@@ -70,40 +70,59 @@ if($_SESSION['nombre'] == null){
 
      
 
-            <!-- sidebar menu  style="background-image: url('images/sidebar-2.jpg')" pegar para estilo-->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" >  
-                <div class="menu_section">
-                <h3>Menu General</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Inicio </a>
-                    <ul class="nav child_menu">
+ <!-- sidebar menu  style="background-image: url('images/sidebar-2.jpg')" pegar para estilo-->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu" >  
+     <div class="menu_section">
+        <h3>Menu General</h3>
+          <ul class="nav side-menu">
+              <li><a><i class="fa fa-home"></i> Inicio <span class="fa fa-chevron-down"></span></a>
+                 <ul class="nav child_menu">
                       <li><a href="./?./?index.html">Vista Principal <i class="fa fa-dashboard" ></i></a></li>
                       <li><a href="despacho_orden.php">Despacho &Oacuterdenes <i class="fa fa-send-o"></i>  </a> </li>                     
                        <li><a href="new_orden.php">Ingresar &Oacuterdenes <i class="fa fa-shopping-cart"></i> </a></li>
-                       <li><a href="new_orden.php">Reclamo de &Oacuterdenes <i class="fa fa-shopping-cart"></i> </a></li>
-                    </ul>
-                  </li>
+                       <li><a href="new_orden.php">Reclamo de &Oacuterdenes <i class="fa fa-frown-o"></i> </a></li>
+                  </ul>
+              </li>
                   
                   <li><a><i class="fa fa-desktop"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="usuario.php">Usuarios  <i class="fa fa-users"></i></a>  </li>
                       <li><a href="Cliente.php">Clientes <i class="fa fa-smile-o" ></i> </a></li>
-                      <li><a href="productos.php">Productos <i class="fa fa-pagelines" ></i> </a></li>
-                     
-                     
+                      <li><a href="productos.php">Productos <i class="fa fa-pagelines" ></i> </a></li>                    
                     </ul>
                   </li>
+
 
                   <li><a><i class="fa fa-cogs"></i> Mantenimiento <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-
-                      <li><a href="new_usuario.php">Usuarios</a></li>             
-                      <li><a href="new_cliente.php">Clientes</a></li>
-                      <li><a href="new_producto.php">Productos</a></li>
-                      <li><a href="new_empaque.php">Empaque</a></li>
-                      
+                       <li><a href="new_usuario.php">Usuarios</a></li>  
+                        <li><a>Clientes<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="new_cliente.php">Nuevo Ingreso</a>
+                            </li>
+                            <li><a href="#level2_1">Nuevo SubCliente</a>
+                            </li>
+                            <li><a href="#level2_2">Asignacion de Subcliente</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li><a>Productos<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="new_producto.php">Nuevo Producto</a></li> 
+                           <!-- <li class="sub_menu"><a href="modif_producto.php">Modificar Producto</a></li> -->
+                        </li>
+                        </ul>
+                  </li>     
+                        
+                      <li><a>Empaque<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="new_empaque.php">Nuevo Empaque</a></li> 
+                            <li class="sub_menu"><a href="modif_empaque.php">Modificar Empaque</a></li> 
+                        </li>
                     </ul>
-                  </li>
+                  </li>     
+
+
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">

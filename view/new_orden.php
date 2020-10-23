@@ -72,22 +72,22 @@ require_once "../controllers/BaseDatos.php";
                         <form class="form-horizontal form-label-left" action="../model/ProductoDatos.php" method="post" novalidate>
 
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre del Cliente <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                              
-                            <select class="form-control" id="idempaque" name="idempaque">
+                            <select class="form-control" id="idempaque" name="idcliente">
                                             <option value="0"> Seleccionar de la lista </option>;
 <?php
     
     $base = new BaseDatos();
     $conexion=$base->getCon();                                              
-    $query = "select * from empaque";
+    $query = "select * from cliente";
     $resultado = sqlsrv_query($conexion,$query);    
     while ($valores = sqlsrv_fetch_array($resultado)) {
       // En esta sección estamos llenando el select con datos extraidos de una base de datos.
       ?>      
-       <option value=" <?php echo $valores['id_empaque'];?>"> <?php echo $valores['id_empaque']." - ".$valores['tipo_empaque'];?>  </option>';
+       <option value=" <?php echo $valores['id_cliente'];?>"> <?php echo $valores['id_cliente']." - ".$valores['clien_compania'];?>  </option>';
      
      <?php } ?>
   </select>
@@ -95,10 +95,28 @@ require_once "../controllers/BaseDatos.php";
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nombre del Subcliente <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+
+                            <select class="form-control" id="idempaque" name="idsubcliente">
+                                            <option value="0"> Seleccionar de la lista </option>;
+<?php
+    
+    $base = new BaseDatos();
+    $conexion=$base->getCon();                                              
+    $query = "select * from subcliente";
+    $resultado = sqlsrv_query($conexion,$query);    
+    while ($valores = sqlsrv_fetch_array($resultado)) {
+      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
+      ?>      
+       <option value=" <?php echo $valores['id_subcliente'];?>"> <?php echo $valores['id_subcliente']." - ".$valores['nom_subcliente'];?>  </option>';
+     
+     <?php } ?>
+  </select> 
+                            
+
+
                             </div>
                           </div>
                           <div class="form-group row">

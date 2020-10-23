@@ -68,12 +68,12 @@ session_start();
             <td> <?php echo $fila['sub_categoria'];  ?> </td> 
             <td> <?php echo $fila['cites_descripcion'];  ?> </td> 
             <td> <?php echo $fila['cant_minima'];  ?> </td> 
-            <td> <?php echo $fila['wk_transito'];  ?> </td> 
+            <td> <?php echo $fila['wk_transito'];  ?> </td>                      
             <td> <?php echo $fila['tipo_empaque'];  ?> </td> 
 
 <td>          
-<a href="#" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
-<a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>
+<a href="modif_producto.php?id=<?php echo $fila['id_producto']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
+ <!-- <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a> -->
 </td>
         </tr>
         <?php  };?>                       
