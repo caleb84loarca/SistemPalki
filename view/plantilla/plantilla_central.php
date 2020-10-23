@@ -1,5 +1,17 @@
+<?php 
+session_start();
+$_SESSION['nombre'];
+$_SESSION['apellido'];
+
+if($_SESSION['nombre'] == null){
+
+  echo "ERROR!! USTED NO TIENE ACCESO AL SISTEMA, DEBE LOGUEARSE PRIMERO O COMUNICARSE CON IT";
+  echo "</br> <a href='../index.php'> Retornar </a>";
+  die();
+}
+?>
 <!DOCTYPE html>
-<html lang="en-En esp">
+<html lang="en-En esp-ESP">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -48,12 +60,9 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2> <?php                 
-                session_start();
-
-                echo $nombre;
-                
-                ?>  </h2>
+                <h2> <?php
+                  echo  $_SESSION['nombre']." ". $_SESSION['apellido'];?> 
+                 </h2>
               </div>
             </div>
             <br>
@@ -69,8 +78,9 @@
                   <li><a><i class="fa fa-home"></i> Inicio </a>
                     <ul class="nav child_menu">
                       <li><a href="./?./?index.html">Vista Principal <i class="fa fa-dashboard" ></i></a></li>
-                      <li><a href="despacho_orden.php">Despacho Ordenes <i class="fa fa-send-o"></i>  </a> </li>
-                      <li><a href="new_orden.php">Ingresar Ordenes <i class="fa fa-shopping-cart"></i> </a></li>
+                      <li><a href="despacho_orden.php">Despacho &Oacuterdenes <i class="fa fa-send-o"></i>  </a> </li>                     
+                       <li><a href="new_orden.php">Ingresar &Oacuterdenes <i class="fa fa-shopping-cart"></i> </a></li>
+                       <li><a href="new_orden.php">Reclamo de &Oacuterdenes <i class="fa fa-shopping-cart"></i> </a></li>
                     </ul>
                   </li>
                   
@@ -139,12 +149,13 @@
 
                       <li class="nav-item dropdown open" style="padding-left: 15px;">
                         <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                          <img src="images/logo.png" >John Doe
+                          <img src="images/avatar.png" > <?php echo $_SESSION['nombre']." ".$_SESSION['apellido'];?> 
                         </a>
                         <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item"  href="javascript:;"> Perfil</a>
-                           
-                          <a class="dropdown-item"  href="../index.php"><i class="fa fa-sign-out pull-right"></i> Salir del Sistema</a>
+                          <a class="dropdown-item"  href="javascript:;"> Perfil</a>                           
+                          <a class="dropdown-item"  href="cerrar_sesion.php" ><i class="fa fa-sign-out pull-right"></i> Salir del Sistema 
+                        
+                        </a>
                         </div>
                       </li>  
                  

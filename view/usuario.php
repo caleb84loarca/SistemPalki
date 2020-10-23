@@ -1,4 +1,4 @@
-<?php require_once  "plantilla/plantilla_central.php"; ?> 
+<?php require_once  "plantilla/plantilla_central.php";?> 
 
 <div class="right_col" role="main">
                 <div class="">

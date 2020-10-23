@@ -1,5 +1,6 @@
 <?php
 require_once "plantilla/plantilla_central.php";
+require_once "../controllers/BaseDatos.php";
 ?>
 
   <!-- page content -->
@@ -35,7 +36,7 @@ require_once "plantilla/plantilla_central.php";
                             <span class="step_no">1</span>
                             <span class="step_descr">
                                               Paso 1<br />
-                                              <small>Seleccionar Datos de Cliente</small>
+                                              <small>Datos del Cliente</small>
                                           </span>
                           </a>
                         </li>
@@ -44,7 +45,7 @@ require_once "plantilla/plantilla_central.php";
                             <span class="step_no">2</span>
                             <span class="step_descr">
                                               Paso 2<br />
-                                              <small>Step 2 description</small>
+                                              <small>Datos del Pedido</small>
                                           </span>
                           </a>
                         </li>
@@ -53,7 +54,7 @@ require_once "plantilla/plantilla_central.php";
                             <span class="step_no">3</span>
                             <span class="step_descr">
                                               Paso 3<br />
-                                              <small>Step 3 description</small>
+                                              <small>Estado del Pedido</small>
                                           </span>
                           </a>
                         </li>
@@ -62,7 +63,7 @@ require_once "plantilla/plantilla_central.php";
                             <span class="step_no">4</span>
                             <span class="step_descr">
                                               Paso 4<br />
-                                              <small>Step 4 description</small>
+                                              <small>Observaciones Finales</small>
                                           </span>
                           </a>
                         </li>
@@ -75,7 +76,7 @@ require_once "plantilla/plantilla_central.php";
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                              
-                              <select class="form-control" id="idempaque" name="idempaque">
+                            <select class="form-control" id="idempaque" name="idempaque">
                                             <option value="0"> Seleccionar de la lista </option>;
 <?php
     

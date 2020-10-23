@@ -1,7 +1,8 @@
 <!--ENCABEZADO DE PLANILLA-->
 <?php 
 //require_once  "plantilla/encabezado.php"; 
-require_once  "plantilla/plantilla_central.php"; ?> 
+require_once  "plantilla/plantilla_central.php";
+session_start(); ?> 
  <!-- page content -->
   
  
