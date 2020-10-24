@@ -38,37 +38,35 @@ values('".$nom1."','".$nom2."','".$ape1."','".$ape2."','".$compania."','".$direc
 
 //datos para actualizar productos
 
-$idprod=$_POST['idproducto'];
-$product=$_POST['product']; 
-$catego=$_POST['catego']; 
-$gene=$_POST['gene']; 
-$espe=$_POST['especies'];
-$subcatego=$_POST['subcatego']; 
-$cite=$_POST['cite'];     
-$cant_min=$_POST['cant_min']; 
-$wktransit=$_POST['wktransitos']; 
-$wkcompras=$_POST['wkcompras']; 
-$idempaques=$_POST['idempaques']; 
+$idclient=$_POST['idcliente'];
+$clienombre=$_POST['clie_nom1']; 
+$clienombre2=$_POST['clie_nom2']; 
+$clieap=$_POST['clie_ape1']; 
+$clieape=$_POST['clie_ape2'];
+$cliecompa=$_POST['cliecompania']; 
+$cliedire=$_POST['cliedireccion'];     
+$cliemail=$_POST['cliemail']; 
+$cliepais=str_replace(' ','',$_POST['id_pais']); 
+$clietel=$_POST['tele1']; 
+$clietel2=$_POST['tele2']; 
+$clietel3=$_POST['tele3']; 
    
 
-if( isset($product) && isset($idempaques) ){
+if( isset($idclient) && isset($cliemail) ){
 
-   actualizarcliente($product,$catego,$gene,$espe,$subcatego,$cite,$cant_min,$wktransit,$wkcompras,$idempaques,$idprod);   
-   print "<script> alert('Datos Actualizados Exitosamente!!'); window.location='../view/productos.php'; </script>";
+   actualizarcliente($clienombre,$clienombre2,$clieap,$clieape,$cliecompa,$cliedire,$cliemail,$clietel,$clietel2,$clietel3,$cliepais,$idclient);   
+   print "<script> alert('Datos Actualizados Exitosamente!!'); window.location='../view/cliente.php'; </script>";
 }
 
 
-
-
-function actualizarcliente($product,$catego,$gene,$espe,$subcatego,$cite,$cant_min,$wktransit,$wkcompras,$idempaques,$idprod){
+function actualizarcliente($clienombre,$clienombre2,$clieap,$clieape,$cliecompa,$cliedire,$cliemail,$clietel,$clietel2,$clietel3,$cliepais,$idclient){
 
     $conn = BaseDatos::getCon();
-    $sql = "update cliente set producto='".$product."', categoria='".$catego."', genero='".$gene."', especie='".$espe."',sub_categoria='".$subcatego."',cites_descripcion='".$cite."',cant_minima=".$cant_min.", wk_transito=".$wktransit.", wk_compra=".$wkcompras.", empaque_id_empaque=".$idempaques."
-    where id_producto=".$idprod;
+$sql = "update cliente set clien_nom1='".$clienombre."',clien_nom2='".$clienombre2."',clien_ape1='".$clieap."',clien_ape2='".$clieape."',clien_compania='".$cliecompa."',clien_direccion='".$cliedire."',clien_correo='".$cliemail."',clien_tel1='".$clietel."',clien_tel2='".$clietel2."',clien_tel3='".$clietel3."',pais_id_pais='".$cliepais."' where id_cliente=".$idclient;
+    
     $resultado = sqlsrv_query($conn,$sql) or die(sqlsrv_error()); 
     return $resultado;
-
-    }   
+ }   
 
 
 

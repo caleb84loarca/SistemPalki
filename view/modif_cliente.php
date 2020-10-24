@@ -84,7 +84,7 @@ $mostrar = mostrarcliente($_GET['id']);
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Pais<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
 
-                                            <select class="form-control" id="idpais" name="idpais">
+                                            <select class="form-control" id="idpais" name="id_pais">
                                             <option value="0"> Seleccionar de la lista </option>;
 
 <?php
