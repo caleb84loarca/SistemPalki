@@ -120,47 +120,61 @@ require_once "../controllers/BaseDatos.php";
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Middle Name / Initial</label>
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Id de &Oacuterden (Cliente)</label>
                             <div class="col-md-6 col-sm-6 ">
                               <input id="middle-name" class="form-control col" type="text" name="middle-name">
                             </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <div id="gender" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
-                                  <input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Male &nbsp;
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
-                                  <input type="radio" name="gender" value="female" class="join-btn"> Female
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <input id="birthday" class="date-picker form-control" required="required" type="text">
-                            </div>
-                          </div>
+                          </div>                        
+                         
+
+                          <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de &Oacuterden<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" class='date' type="date" name="fechaingreso" required='required'></div>
+                                        </div>
 
                         </form>
 
                       </div> <!-- cierra div step1 -->
                       <div id="step-2">
-                        <h2 class="StepTitle">Step 2 Content</h2>
+                        <h2 class="StepTitle">Detalle del Pedido</h2>
                         
-                        <form class="form-horizontal form-label-left">
+   <form class="form-horizontal form-label-left">
+
+      <div class="form-group row">
+           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Selecionar el Producto <span class="required">*</span>
+           </label>
+           <div class="col-md-6 col-sm-6 ">
+
+                            <select class="form-control" id="idempaque" name="idsubcliente">
+                                            <option value="0"> Seleccionar de la lista </option>;
+<?php
+    
+    $base = new BaseDatos();
+    $conexion=$base->getCon();                                              
+    $query = "select * from producto";
+    $resultado = sqlsrv_query($conexion,$query);    
+    while ($valores = sqlsrv_fetch_array($resultado)) {
+      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
+      ?>      
+       <option value=" <?php echo $valores['id_producto'];?>"> <?php echo $valores['id_producto']." - ".$valores['producto'];?>  </option>';
+     
+     <?php } ?>
+  </select> 
+              </div>
+                </div>
+
 
 <div class="form-group row">
-  <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
+  <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Cantidad a Solicitar <span class="required">*</span>
   </label>
   <div class="col-md-6 col-sm-6 ">
     <input type="text" id="first-name" required="required" class="form-control  ">
   </div>
 </div>
+
+
+
 <div class="form-group row">
   <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span class="required">*</span>
   </label>

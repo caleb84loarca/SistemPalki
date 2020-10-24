@@ -38,7 +38,8 @@ $mostrar = mostrarempaque($_GET['id']);
   <div class="field item form-group">
           <label class="col-form-label col-md-3 col-sm-3  label-align">Id Empaque <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-              <input class="form-control" name="idempaque" value="<?php echo $mostrar[0];?>" required="required" />
+            <input type="hidden" name="idempaque" value="<?php echo $mostrar[0];?>" />  
+              <input class="form-control" name="idempaque" value="<?php echo $mostrar[0];?>" required="required" disabled />
             </div>
        </div>
                

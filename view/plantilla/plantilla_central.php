@@ -78,8 +78,8 @@ if($_SESSION['nombre'] == null){
               <li><a><i class="fa fa-home"></i> Inicio <span class="fa fa-chevron-down"></span></a>
                  <ul class="nav child_menu">
                       <li><a href="./?./?index.html">Vista Principal <i class="fa fa-dashboard" ></i></a></li>
-                      <li><a href="despacho_orden.php">Despacho &Oacuterdenes <i class="fa fa-send-o"></i>  </a> </li>                     
-                       <li><a href="new_orden.php">Ingresar &Oacuterdenes <i class="fa fa-shopping-cart"></i> </a></li>
+                      <li><a href="new_orden.php">Ingresar &Oacuterdenes <i class="fa fa-shopping-cart"></i> </a></li>
+                      <li><a href="despacho_orden.php">Despacho &Oacuterdenes <i class="fa fa-send-o"></i>  </a> </li>
                        <li><a href="new_orden.php">Reclamo de &Oacuterdenes <i class="fa fa-frown-o"></i> </a></li>
                   </ul>
               </li>
@@ -117,7 +117,7 @@ if($_SESSION['nombre'] == null){
                       <li><a>Empaque<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             <li class="sub_menu"><a href="new_empaque.php">Nuevo Empaque</a></li> 
-                            <li class="sub_menu"><a href="modif_empaque.php">Modificar Empaque</a></li> 
+                           <!--   <li class="sub_menu"><a href="modif_empaque.php">Modificar Empaque</a></li> -->
                         </li>
                     </ul>
                   </li>     
