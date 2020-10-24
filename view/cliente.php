@@ -55,7 +55,7 @@ $sql ="Select c.id_cliente, concat(c.clien_nom1,' ',c.clien_nom2) as Nombres, co
                 <td> <?php echo $fecha = $fila['fecha_ingreso']->format('d/m/yy');  ?> </td>  
                 
 <td>          
-<a href="#" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
+<a href="modif_cliente.php?id=<?php echo $fila['id_cliente']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
 
 </td>             
             </tr>
