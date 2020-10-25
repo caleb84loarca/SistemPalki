@@ -67,7 +67,7 @@ $cite=$_POST['cite'];
 $cant_min=$_POST['cant_min']; 
 $wktransit=$_POST['wktransitos']; 
 $wkcompras=$_POST['wkcompras']; 
-$idempaques=$_POST['idempaques']; 
+$idempaques=str_replace(' ','',$_POST['idempaques']); 
    
 
 if( isset($product) && isset($idempaques) ){
@@ -75,9 +75,6 @@ if( isset($product) && isset($idempaques) ){
    actualizarproducto($product,$catego,$gene,$espe,$subcatego,$cite,$cant_min,$wktransit,$wkcompras,$idempaques,$idprod);   
    print "<script> alert('Datos Actualizados Exitosamente!!'); window.location='../view/productos.php'; </script>";
 }
-
-
-
 
 function actualizarproducto($product,$catego,$gene,$espe,$subcatego,$cite,$cant_min,$wktransit,$wkcompras,$idempaques,$idprod){
 

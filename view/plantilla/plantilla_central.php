@@ -122,6 +122,13 @@ if($_SESSION['nombre'] == null){
                     </ul>
                   </li>     
 
+                  <li><a>Medidas/Alturas<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="new_medida.php">Nueva Medida/Altura</a></li> 
+                           <!--   <li class="sub_menu"><a href="modif_empaque.php">Modificar Empaque</a></li> -->
+                        </li>
+                    </ul>
+                  </li>     
 
 
             <!-- /menu footer buttons -->
