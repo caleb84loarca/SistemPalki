@@ -2,6 +2,7 @@
 session_start();
 $_SESSION['nombre'];
 $_SESSION['apellido'];
+$_SESSION['idusuario'];
 
 if($_SESSION['nombre'] == null){
 
@@ -80,7 +81,7 @@ if($_SESSION['nombre'] == null){
                       <li><a href="./?./?index.html">Vista Principal <i class="fa fa-dashboard" ></i></a></li>
                       <li><a href="new_orden.php">Ingresar &Oacuterdenes <i class="fa fa-shopping-cart"></i> </a></li>
                       <li><a href="despacho_orden.php">Despacho &Oacuterdenes <i class="fa fa-send-o"></i>  </a> </li>
-                       <li><a href="new_orden.php">Reclamo de &Oacuterdenes <i class="fa fa-frown-o"></i> </a></li>
+                       <li><a href="reclamo_orden.php">Reclamo de &Oacuterdenes <i class="fa fa-frown-o"></i> </a></li>
                   </ul>
               </li>
                   
@@ -88,7 +89,8 @@ if($_SESSION['nombre'] == null){
                     <ul class="nav child_menu">
                       <li><a href="usuario.php">Usuarios  <i class="fa fa-users"></i></a>  </li>
                       <li><a href="Cliente.php">Clientes <i class="fa fa-smile-o" ></i> </a></li>
-                      <li><a href="productos.php">Productos <i class="fa fa-pagelines" ></i> </a></li>                    
+                      <li><a href="productos.php">Productos <i class="fa fa-pagelines" ></i> </a></li> 
+                      <li><a href="reporte_orden.php">&Oacuterdenes <i class="fa fa-shopping-cart" ></i> </a></li>                    
                     </ul>
                   </li>
 
@@ -237,6 +239,7 @@ if($_SESSION['nombre'] == null){
 <script src="js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="js/demo.js"></script>
+<script src='js/plotly-latest.min.js'></script>
 
 
 </body>

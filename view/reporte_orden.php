@@ -13,7 +13,7 @@ $_SESSION['idusuario'];
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Reclamo de &Oacuterden</h3>
+                            <h3>Ingresar Datos de &Oacuterden</h3>
                         </div>                        
                     </div>
                     <div class="clearfix"></div>
@@ -22,7 +22,7 @@ $_SESSION['idusuario'];
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Informacion del Pedido</h2>
+                                    <h2>Reporte de &Oacuterdenes por Fecha</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -30,110 +30,48 @@ $_SESSION['idusuario'];
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-  <form class="" action="../model/ReclamoOrdenDatos.php" method="post" novalidate>             
+  <form class="" action="../model/ReporteOrdenData.php" method="post" novalidate>             
                
                 
   <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> &Oacuterden <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre del Cliente <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                              
-                            <select class="form-control" id="idempaque" name="orden">
+                            <select class="form-control" id="idcliente" name="idcliente">
                                             <option value="0"> Seleccionar de la lista </option>;
 <?php
     
     $base = new BaseDatos();
     $conexion=$base->getCon();                                              
-    $query = "select * from orden";
+    $query = "select * from cliente";
     $resultado = sqlsrv_query($conexion,$query);    
     while ($valores = sqlsrv_fetch_array($resultado)) {
       // En esta sección estamos llenando el select con datos extraidos de una base de datos.
       ?>      
-       <option value=" <?php echo $valores['id_orden'];?>"> <?php echo $valores['ord_nombre'];?>  </option>';
+       <option value=" <?php echo $valores['id_cliente'];?>"> <?php echo $valores['id_cliente']." - ".$valores['clien_compania'];?>  </option>';
      
      <?php } ?>
   </select>
-                              
-                            </div>
-                          </div>
-
+    </div>
+</div>    
                           
+                              <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de &Oacuterden (Inicial)<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" class='date' type="date" name="fechaingreso" required='required'></div>
+                                        </div>
 
-           <div class="form-group row">
-           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Selecionar el Producto <span class="required">*</span>
-           </label>
-           <div class="col-md-6 col-sm-6 ">
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de &Oacuterden (Final)<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" class='date' type="date" name="fechafinal" required='required'></div>
+                                        </div>
 
-                            <select class="form-control" id="idproducto" name="idproducto">
-                                            <option value="0"> Seleccionar de la lista </option>;
-<?php
-    
-    $base = new BaseDatos();
-    $conexion=$base->getCon();                                              
-    $query = "select * from producto";
-    $resultado = sqlsrv_query($conexion,$query);    
-    while ($valores = sqlsrv_fetch_array($resultado)) {
-      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
-      ?>      
-       <option value=" <?php echo $valores['id_producto'];?>"> <?php echo $valores['producto'];?>  </option>';
-     
-     <?php } ?>
-  </select> 
-              </div>
-                </div>
+               
 
-
-
-                <div class="form-group row">
-           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Medida Despachada <span class="required">*</span>
-           </label>
-           <div class="col-md-6 col-sm-6 ">
-
-                            <select class="form-control" id="idmedida" name="idmedida">
-                                            <option value="0"> Seleccionar de la lista </option>;
-<?php
-    
-    $base = new BaseDatos();
-    $conexion=$base->getCon();                                              
-    $query = "select * from medida";
-    $resultado = sqlsrv_query($conexion,$query);    
-    while ($valores = sqlsrv_fetch_array($resultado)) {
-      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
-      ?>      
-       <option value=" <?php echo $valores['id_medida'];?>"> <?php echo $valores['medida'];?>  </option>';
-     
-     <?php } ?>
-  </select> 
-              </div>
-                </div>
-
-<div class="form-group row">
-  <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Cantidad Reclamada <span class="required">*</span>
-  </label>
-  <div class="col-md-6 col-sm-6 ">
-    <input type="text" id="cant_despacho" required="required" class="form-control" name="cant_despacho">
-  </div>
-</div>
-
-
-                            <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de Reclamo<span class="required">*</span></label>
-                                  <div class="col-md-6 col-sm-6">
-                                      <input class="form-control" class='date' type="date" name="fechadespacho" required='required'></div>
-                                   </div>            
-
-
-    <div class="form-group row">
-                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Detalle de Reclamo</label>
-                            <div class="col-md-6 col-sm-6 ">
-                            <textarea class="form-control col" rows="5" cols="50" id="reclamo" name="reclamo">Aqui</textarea>                             
-                            </div>
-                          </div>     
-
-
-
-
-
+                          <input  class="form-control col" type="hidden" name="idusuario" value="<?php echo $_SESSION['idusuario'];?>" disable>
+                                                                                                           
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
@@ -154,15 +92,13 @@ $_SESSION['idusuario'];
 
 
 
-
-
             
 
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Despacho de &Oacuterdenes (Detalle)</h3>
+                            <h3>&Oacuterdenes Cargadas</h3>
                         </div>                        
                     </div>
                     <div class="clearfix"></div>
@@ -187,12 +123,14 @@ $_SESSION['idusuario'];
                                 <table id="tbempaque" class="mdl-data-table" style="width:100%" table-condensed>
         <thead>
             <tr>
-                <th>ORDEN INTERNA</th>
-                <th>PRODUCTO</th>   
-                <th>MEDIDA</th>  
-                <th>CANTIDAD DESPACHADA</th>                  
-                <th>SEMANA DESPACHO</th>
-                                    
+                <th>ORDEN INTERNO</th>
+                <th>ORDEN SEGUN CLIENTE</th>   
+                <th>STATUS DE ORDEN</th>                 
+                <th>CLIENTE</th>  
+                <th>SUBCLIENTE</th> 
+                <th>ORDEN DE DESTINO</th> 
+                <th>TIPO DE EMBARQUE</th> 
+                <th>OBSERVACIONES</th> 
                 <th>ACCIONES</th>   
             </tr>
         </thead>
@@ -200,27 +138,36 @@ $_SESSION['idusuario'];
            
         <?php 
             
+            $conn = BaseDatos::getCon();
+            $sql = "select * from orden
+            where fecha_orden between '".$fechaingreso."' and '".$fechafinal."' and cliente_id_cliente=".$idcliente;
+            $resultado = sqlsrv_query($conn,$sql) or die(sqlsrv_error()); 
+            $fila = sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC);
+       
+             return [
+                $fila['cliente_id_cliente'],
+                $fila['ord_destino']
+                ];
+
+
             $conexion=BaseDatos::getCon();   
-            $query = "select ddo.cantidad_despacho,ddo.wk_despacho, ddo.fecha_etd, o.ord_nombre,m.medida, p.producto from despacho_det_orden as ddo
-            inner join orden as o on o.id_orden=ddo.id_orden
-            inner join detalle_orden as do on do.orden_id_orden=o.id_orden
-            inner join producto as pr on pr.id_producto=do.producto_id_producto
-            inner join medida as m on m.id_medida=do.medida_id_medida
-            inner join producto as p on p.id_producto=do.producto_id_producto;";
+            $query = "select * from orden";
             $resultado = sqlsrv_query($conexion,$query);  
 
             while ($fila = sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC)) {
             ?>
         <tr>
             <td> <?php echo $fila['ord_nombre'];  ?> </td>
-            <td> <?php echo $fila['producto'];  ?> </td>  
-            <td> <?php echo $fila['medida'];  ?> </td>        
-            <td> <?php echo $fila['cantidad_despacho'];  ?> </td>    
-            <td> <?php echo $fila['wk_despacho'];  ?> </td>
-           
-                            
+            <td> <?php echo $fila['ord_nombreclie'];  ?> </td>  
+            <td> <?php echo $fila['estado_id_estado'];  ?> </td> 
+            <td> <?php echo $fila['cliente_id_cliente'];  ?> </td>  
+            <td> <?php echo $fila['subcliente_id_subcliente'];  ?> </td>   
+            <td> <?php echo $fila['ord_destino'];  ?> </td>   
+            <td> <?php echo $fila['embarque_id_embarque'];  ?> </td>   
+            <td> <?php echo $fila['observaciones'];  ?> </td>   
+             
 <td>          
-<a href="new_orden.php?id=<?php echo $fila['id_detalleorden']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true" >Modificar</a>
+<a href="new_orden.php?id=<?php echo $fila['id_orden']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true" >Modificar</a>
  <!-- <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>  -->
 </td>
         </tr>
@@ -228,13 +175,15 @@ $_SESSION['idusuario'];
         </tbody>
         <tfoot>
             <tr>
-                <th>ORDEN INTERNA</th>
-                <th>PRODUCTO</th>   
-                <th>MEDIDA</th>  
-                <th>CANTIDAD DESPACHADA</th>                  
-                <th>SEMANA DESPACHO</th>
-                                       
-                <th>ACCIONES</th>   
+                <th>ORDEN INTERNO</th>
+                <th>ORDEN SEGUN CLIENTE</th>   
+                <th>STATUS DE ORDEN</th>
+                <th>CLIENTE</th>
+                <th>SUBCLIENTE</th>
+                <th>ORDEN DE DESTINO</th> 
+                <th>TIPO DE EMBARQUE</th> 
+                <th>OBSERVACIONES</th> 
+                <th>ACCIONES</th>     
             </tr>
         </tfoot>
     </table>
@@ -264,12 +213,10 @@ $_SESSION['idusuario'];
                             </div>
                         </div>
                     </div>
-                </div>
-           
-
+               
+                 
 
   
  <!-- /page content -->
 <!--PIE DE PAGINA DE PLANILLA-->
-
 

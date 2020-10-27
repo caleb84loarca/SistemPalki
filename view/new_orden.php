@@ -1,77 +1,40 @@
-<?php
-require_once "plantilla/plantilla_central.php";
-require_once "../controllers/BaseDatos.php";
-?>
+<!--ENCABEZADO DE PLANILLA-->
+<?php 
+require_once  "plantilla/plantilla_central.php"; 
+require_once "../controllers/BaseDatos.php"; 
 
-  <!-- page content -->
-  <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>&Oacuterdenes</h3>
-              </div>              
-            </div>
-            <div class="clearfix"></div>
+            
+session_start();
+$_SESSION['idusuario'];
+?> 
 
-            <div class="row">
-
-              <div class="col-md-12 col-sm-12 ">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Ingreso de &Oacuterdenes</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>  
-                    </ul>
+ <!-- page content -->
+             
+<div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Ingresar Datos de &Oacuterden</h3>
+                        </div>                        
+                    </div>
                     <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
 
-
-                    <!-- Smart Wizard -->
-                    <p>Formato B&aacutesico para la toma de &oacuterdenes recibidas por los clientes.</p>
-                    <div id="wizard" class="form_wizard wizard_horizontal">
-                      <ul class="wizard_steps">
-                        <li>
-                          <a href="#step-1">
-                            <span class="step_no">1</span>
-                            <span class="step_descr">
-                                              Paso 1<br />
-                                              <small>Datos del Cliente</small>
-                                          </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-2">
-                            <span class="step_no">2</span>
-                            <span class="step_descr">
-                                              Paso 2<br />
-                                              <small>Datos del Pedido</small>
-                                          </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-3">
-                            <span class="step_no">3</span>
-                            <span class="step_descr">
-                                              Paso 3<br />
-                                              <small>Estado del Pedido</small>
-                                          </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-4">
-                            <span class="step_no">4</span>
-                            <span class="step_descr">
-                                              Paso 4<br />
-                                              <small>Observaciones Finales</small>
-                                          </span>
-                          </a>
-                        </li>
-                      </ul>
-                      <div id="step-1">
-                        <form class="form-horizontal form-label-left" action="../model/ProductoDatos.php" method="post" novalidate>
-
-                          <div class="form-group row">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Formulario Informaci&oacuten del Pedido</h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+  <form class="" action="../model/OrdenDatos.php" method="post" novalidate>             
+               
+                
+  <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre del Cliente <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -99,7 +62,7 @@ require_once "../controllers/BaseDatos.php";
                             </label>
                             <div class="col-md-6 col-sm-6 ">
 
-                            <select class="form-control" id="idempaque" name="idsubcliente">
+                            <select class="form-control" id="idsubcliente" name="idsubcliente">
                                             <option value="0"> Seleccionar de la lista </option>;
 <?php
     
@@ -114,17 +77,24 @@ require_once "../controllers/BaseDatos.php";
      
      <?php } ?>
   </select> 
-                            
-
-
                             </div>
                           </div>
+
+
                           <div class="form-group row">
                             <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Id de &Oacuterden (Cliente)</label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input id="middle-name" class="form-control col" type="text" name="middle-name">
+                              <input id="middle-name" class="form-control col" type="text" name="ordencliente">
                             </div>
-                          </div>                        
+                          </div>              
+                          
+                            <div class="form-group row">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Id de &Oacuterden (Interno)</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="middle-name" class="form-control col" type="text" name="ordeninterno">
+                            </div>
+                          </div>     
+                          
                          
 
                           <div class="field item form-group">
@@ -133,87 +103,115 @@ require_once "../controllers/BaseDatos.php";
                                                 <input class="form-control" class='date' type="date" name="fechaingreso" required='required'></div>
                                         </div>
 
-                        </form>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de &Oacuterden (Cliente)<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input class="form-control" class='date' type="date" name="fechacliente" required='required'></div>
+                                        </div>
 
-                      </div> <!-- cierra div step1 -->
-                      <div id="step-2">
-                        <h2 class="StepTitle">Detalle del Pedido</h2>
+                                        <div class="form-group row">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Destino de &Oacuterden</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="middle-name" class="form-control col" type="text" name="destinorden">
+                            </div>
+                          </div>     
+
                         
-   <form class="form-horizontal form-label-left">
 
-      <div class="form-group row">
-           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Selecionar el Producto <span class="required">*</span>
+                          <div class="form-group row">
+           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Tipo de Embarque <span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 ">
 
-                            <select class="form-control" id="idempaque" name="idsubcliente">
+                            <select class="form-control" id="idembarque" name="idembarque">
                                             <option value="0"> Seleccionar de la lista </option>;
 <?php
     
     $base = new BaseDatos();
     $conexion=$base->getCon();                                              
-    $query = "select * from producto";
+    $query = "select * from embarque";
     $resultado = sqlsrv_query($conexion,$query);    
     while ($valores = sqlsrv_fetch_array($resultado)) {
       // En esta sección estamos llenando el select con datos extraidos de una base de datos.
       ?>      
-       <option value=" <?php echo $valores['id_producto'];?>"> <?php echo $valores['id_producto']." - ".$valores['producto'];?>  </option>';
+       <option value=" <?php echo $valores['id_embarque'];?>"> <?php echo $valores['embarque'];?>  </option>';
      
      <?php } ?>
   </select> 
               </div>
                 </div>
-
-
 
                 <div class="form-group row">
-           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Medida Requerida <span class="required">*</span>
+           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Estado de Orden <span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 ">
 
-                            <select class="form-control" id="idempaque" name="idsubcliente">
+                            <select class="form-control" id="idestado" name="idestado">
                                             <option value="0"> Seleccionar de la lista </option>;
 <?php
     
     $base = new BaseDatos();
     $conexion=$base->getCon();                                              
-    $query = "select * from medida";
+    $query = "select * from estado_orden";
     $resultado = sqlsrv_query($conexion,$query);    
     while ($valores = sqlsrv_fetch_array($resultado)) {
       // En esta sección estamos llenando el select con datos extraidos de una base de datos.
       ?>      
-       <option value=" <?php echo $valores['id_medida'];?>"> <?php echo $valores['id_medida']." - ".$valores['medida'];?>  </option>';
+       <option value=" <?php echo $valores['id_estado'];?>"> <?php echo $valores['estado'];?>  </option>';
      
      <?php } ?>
   </select> 
               </div>
                 </div>
 
+                <div class="form-group row">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Observaciones</label>
+                            <div class="col-md-6 col-sm-6 ">
+                            <textarea class="form-control col" rows="5" cols="50" id="observaciones" name="observaciones">Aqui</textarea>                             
+                            </div>
+                          </div>     
+               
+
+                          <input  class="form-control col" type="hidden" name="idusuario" value="<?php echo $_SESSION['idusuario'];?>" disable>
+                                                                                                           
+                                        <div class="ln_solid">
+                                            <div class="form-group">
+                                                <div class="col-md-6 offset-md-3">
+                                                    <br>
+                                                    <button type='submit' class="btn btn-primary">Registrar</button>
+                                                    <button type='reset' class="btn btn-success">Limpiar Formulario</button>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        </div>
+    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-<div class="form-group row">
-  <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Cantidad a Solicitar <span class="required">*</span>
-  </label>
-  <div class="col-md-6 col-sm-6 ">
-    <input type="text" id="first-name" required="required" class="form-control  ">
-  </div>
-</div>
+<script> window.onload = document.getElementById('observaciones').select(); </script>
+           
 
+            
 
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>&Oacuterdenes Cargadas</h3>
+                        </div>                        
+                    </div>
+                    <div class="clearfix"></div>
 
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12" align="center">
+                            <div class="x_panel">
 
-<div class="form-group row">
-  <label class="col-form-label col-md-3 col-sm-3 label-align">Cargar a &Oacuterden</label>
-  <div class="col-md-6 col-sm-6 ">
-    <div id="gender" class="btn-group" data-toggle="buttons">
-      <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
-        <input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Cargar Datos &nbsp;
-      </label>
-    </div>
-  </div>
-</div>
-
-      <div class="row">
+                            <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
@@ -226,12 +224,17 @@ require_once "../controllers/BaseDatos.php";
                                 </div>
                                 <div class="x_content">
 
-<table id="tbempaque" class="mdl-data-table" style="width:100%">
+                                <table id="tbempaque" class="mdl-data-table" style="width:100%" table-condensed>
         <thead>
             <tr>
-                <th>PRODUCTO</th>
-                <th>MEDIDAS</th>   
-                <th>CANTIDAD</th>              
+                <th>ORDEN INTERNO</th>
+                <th>ORDEN SEGUN CLIENTE</th>   
+                <th>STATUS DE ORDEN</th>                 
+                <th>CLIENTE</th>  
+                <th>SUBCLIENTE</th> 
+                <th>ORDEN DE DESTINO</th> 
+                <th>TIPO DE EMBARQUE</th> 
+                <th>OBSERVACIONES</th> 
                 <th>ACCIONES</th>   
             </tr>
         </thead>
@@ -240,17 +243,23 @@ require_once "../controllers/BaseDatos.php";
         <?php 
             
             $conexion=BaseDatos::getCon();   
-            $query = "select * from empaque";
+            $query = "select id_orden, ord_nombre,ord_nombreclie,estado_id_estado,fecha_orden,fecha_ordcliente,cliente_id_cliente,subcliente_id_subcliente,ord_destino,embarque_id_embarque,observaciones from orden";
             $resultado = sqlsrv_query($conexion,$query);  
 
             while ($fila = sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC)) {
             ?>
         <tr>
-            <td> <?php echo $fila['id_empaque'];  ?> </td>
-            <td> <?php echo $fila['tipo_empaque'];  ?> </td>  
-            <td> <?php echo $fila['tipo_empaque'];  ?> </td>                
+            <td> <?php echo $fila['ord_nombre'];  ?> </td>
+            <td> <?php echo $fila['ord_nombreclie'];  ?> </td>  
+            <td> <?php echo $fila['estado_id_estado'];  ?> </td> 
+            <td> <?php echo $fila['cliente_id_cliente'];  ?> </td>  
+            <td> <?php echo $fila['subcliente_id_subcliente'];  ?> </td>   
+            <td> <?php echo $fila['ord_destino'];  ?> </td>   
+            <td> <?php echo $fila['embarque_id_embarque'];  ?> </td>   
+            <td> <?php echo $fila['observaciones'];  ?> </td>   
+             
 <td>          
-<a href="new_orden.php?id=<?php echo $fila['id_empaque']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true" >Modificar</a>
+<a href="new_orden.php?id=<?php echo $fila['id_orden']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true" >Modificar</a>
  <!-- <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>  -->
 </td>
         </tr>
@@ -258,10 +267,15 @@ require_once "../controllers/BaseDatos.php";
         </tbody>
         <tfoot>
             <tr>
-                <th>PRODUCTO</th>
-                <th>MEDIDAS</th>   
-                <th>CANTIDAD</th>
-                <th>ACCIONES</th>   
+                <th>ORDEN INTERNO</th>
+                <th>ORDEN SEGUN CLIENTE</th>   
+                <th>STATUS DE ORDEN</th>
+                <th>CLIENTE</th>
+                <th>SUBCLIENTE</th>
+                <th>ORDEN DE DESTINO</th> 
+                <th>TIPO DE EMBARQUE</th> 
+                <th>OBSERVACIONES</th> 
+                <th>ACCIONES</th>     
             </tr>
         </tfoot>
     </table>
@@ -291,73 +305,10 @@ require_once "../controllers/BaseDatos.php";
                             </div>
                         </div>
                     </div>
-                </div>
-            
+               
+                 
 
+  
+ <!-- /page content -->
+<!--PIE DE PAGINA DE PLANILLA-->
 
-      
-
-                      </div><!-- cierra div step2 -->
-
-
-                      <div id="step-3">
-                        <h2 class="StepTitle">Step 3 Content</h2>
-                       
-                        <form class="form-horizontal form-label-left">
-
-<div class="form-group row">
-  <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
-  </label>
-  <div class="col-md-6 col-sm-6 ">
-    <input type="text" id="first-name" required="required" class="form-control  ">
-  </div>
-</div>
-<div class="form-group row">
-  <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span class="required">*</span>
-  </label>
-  <div class="col-md-6 col-sm-6 ">
-    <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
-  </div>
-</div>
-<div class="form-group row">
-  <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Middle Name / Initial</label>
-  <div class="col-md-6 col-sm-6 ">
-    <input id="middle-name" class="form-control col" type="text" name="middle-name">
-  </div>
-</div>
-<div class="form-group row">
-  <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
-  <div class="col-md-6 col-sm-6 ">
-    <div id="gender" class="btn-group" data-toggle="buttons">
-      <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
-        <input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Male &nbsp;
-      </label>
-      <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
-        <input type="radio" name="gender" value="female" class="join-btn"> Female
-      </label>
-    </div>
-  </div>
-</div>
-<div class="form-group row">
-  <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
-  </label>
-  <div class="col-md-6 col-sm-6 ">
-    <input id="birthday" class="date-picker form-control" required="required" type="text">
-  </div>
-</div>
-
-
-                      </div> <!-- cierra div step3 -->
-
-                    </div>
-                  
-                    <!-- End SmartWizard Content -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="clearfix"></div>
-        <!-- /page content -->
