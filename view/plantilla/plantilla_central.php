@@ -81,6 +81,7 @@ if($_SESSION['nombre'] == null){
                       <li><a href="./?./?index.html">Vista Principal <i class="fa fa-dashboard" ></i></a></li>
                       <li><a href="new_orden.php">Ingresar &Oacuterdenes <i class="fa fa-shopping-cart"></i> </a></li>
                       <li><a href="despacho_orden.php">Despacho &Oacuterdenes <i class="fa fa-send-o"></i>  </a> </li>
+                      <li><a href="saldos_orden.php">Saldos de &Oacuterdenes <i class="fa fa-calculator"></i>  </a> </li>
                        <li><a href="reclamo_orden.php">Reclamo de &Oacuterdenes <i class="fa fa-frown-o"></i> </a></li>
                   </ul>
               </li>
@@ -169,6 +170,13 @@ if($_SESSION['nombre'] == null){
              <nav class="nav navbar-nav">
                 <ul class=" navbar-right">                
              <?php
+             date_default_timezone_set('UTC');
+           
+           // $date = date_create("29-03-2020");
+            // echo date_format($date,"d/m/Y H:i:s");
+
+
+
                         // Prints the day
                         echo "Guatemala ".date("l") . ", ";
                         // Prints the day, date, month, year, time, AM or PM

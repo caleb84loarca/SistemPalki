@@ -2,11 +2,13 @@
 <?php 
 require_once  "plantilla/plantilla_central.php"; 
 require_once "../controllers/BaseDatos.php"; 
-
+require_once "../model/OrdenDatos.php"; 
             
 session_start();
 $_SESSION['idusuario'];
-?> 
+$mostrar = mostrarorden($_GET['id']);
+
+?>
 
  <!-- page content -->
              
@@ -14,7 +16,7 @@ $_SESSION['idusuario'];
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Ingresar Datos de &Oacuterden</h3>
+                            <h3>Modificar Datos de &Oacuterden</h3>
                         </div>                        
                     </div>
                     <div class="clearfix"></div>
@@ -23,7 +25,7 @@ $_SESSION['idusuario'];
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Formulario Informaci&oacuten del Pedido</h2>
+                                    <h2>Formulario para Modificar &Oacuterden</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -33,27 +35,14 @@ $_SESSION['idusuario'];
                                 <div class="x_content">
   <form class="" action="../model/OrdenDatos.php" method="post" novalidate>             
                
+  <input id="middle-name" class="form-control col" type="hidden" name="orden" value="<?php echo $mostrar[0];?>" >                       
+                           
                 
   <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nombre del Cliente <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                             
-                            <select class="form-control" id="idempaque" name="idcliente">
-                                            <option value="0"> Seleccionar de la lista </option>;
-<?php
-    
-    $base = new BaseDatos();
-    $conexion=$base->getCon();                                              
-    $query = "select * from cliente";
-    $resultado = sqlsrv_query($conexion,$query);    
-    while ($valores = sqlsrv_fetch_array($resultado)) {
-      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
-      ?>      
-       <option value=" <?php echo $valores['id_cliente'];?>"> <?php echo $valores['id_cliente']." - ".$valores['clien_compania'];?>  </option>';
-     
-     <?php } ?>
-  </select>
+                            <input id="middle-name" class="form-control col" type="text" name="orden" value="<?php echo $mostrar[1];?>" disabled >                       
                               
                             </div>
                           </div>
@@ -62,21 +51,7 @@ $_SESSION['idusuario'];
                             </label>
                             <div class="col-md-6 col-sm-6 ">
 
-                            <select class="form-control" id="idsubcliente" name="idsubcliente">
-                                            <option value="0"> Seleccionar de la lista </option>;
-<?php
-    
-    $base = new BaseDatos();
-    $conexion=$base->getCon();                                              
-    $query = "select * from subcliente";
-    $resultado = sqlsrv_query($conexion,$query);    
-    while ($valores = sqlsrv_fetch_array($resultado)) {
-      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
-      ?>      
-       <option value=" <?php echo $valores['id_subcliente'];?>"> <?php echo $valores['id_subcliente']." - ".$valores['nom_subcliente'];?>  </option>';
-     
-     <?php } ?>
-  </select> 
+                            <input id="middle-name" class="form-control col" type="text" name="orden" value="<?php echo $mostrar[2];?>" disabled>   
                             </div>
                           </div>
 
@@ -84,35 +59,23 @@ $_SESSION['idusuario'];
                           <div class="form-group row">
                             <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Id de &Oacuterden (Cliente)</label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input id="middle-name" class="form-control col" type="text" name="ordencliente" placeholder="AJ-001-001-2020">
+                              <input id="middle-name" class="form-control col" type="text" name="ordencliente" value="<?php echo $mostrar[3];?>" disabled>
                             </div>
                           </div>              
                           
                             <div class="form-group row">
                             <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Id de &Oacuterden (Interno)</label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input id="middle-name" class="form-control col" type="text" name="ordeninterno" placeholder="001-001-2020">
+                              <input id="middle-name" class="form-control col" type="text" name="ordeninterno" value="<?php echo $mostrar[4];?>" >
                             </div>
                           </div>     
                           
                          
 
-                          <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de &Oacuterden<span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='date' type="date" name="fechaingreso" required='required'></div>
-                                        </div>
-
-                                        <div class="field item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de &Oacuterden (Cliente)<span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='date' type="date" name="fechacliente" required='required'></div>
-                                        </div>
-
-                                        <div class="form-group row">
+                          <div class="form-group row">
                             <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Destino de &Oacuterden (Pa&iacutes)</label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input id="middle-name" class="form-control col" type="text" name="destinorden" placeholder="HOLANDA">
+                              <input id="middle-name" class="form-control col" type="text" name="ord_destino" value="<?php echo $mostrar[5];?>">
                             </div>
                           </div>     
 
@@ -167,7 +130,7 @@ $_SESSION['idusuario'];
                 <div class="form-group row">
                             <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Observaciones</label>
                             <div class="col-md-6 col-sm-6 ">
-                            <textarea class="form-control col" rows="5" cols="50" id="observaciones" name="observaciones" placeholder="Observaciones aqui"></textarea>                             
+                            <textarea class="form-control col" rows="5" cols="50" id="observaciones" name="observaciones" value=""><?php echo $mostrar[6];?></textarea>                             
                             </div>
                           </div>     
                
@@ -178,7 +141,7 @@ $_SESSION['idusuario'];
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
                                                     <br>
-                                                    <button type='submit' class="btn btn-primary">Registrar</button>
+                                                    <button type='submit' class="btn btn-primary">Actualizar</button>
                                                     <button type='reset' class="btn btn-success">Limpiar Formulario</button>
                                                     <br>
                                                 </div>
@@ -265,7 +228,7 @@ $_SESSION['idusuario'];
             <td> <?php echo $fila['observaciones'];  ?> </td>   
              
 <td>          
-<a href="modif_orden.php?id=<?php echo $fila['id_orden']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true" >Modificar</a>
+<a href="new_orden.php?id=<?php echo $fila['id_orden']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true" >Modificar</a>
  <!-- <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>  -->
 </td>
         </tr>

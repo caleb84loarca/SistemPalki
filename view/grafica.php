@@ -6,7 +6,7 @@ $conn = BaseDatos::getCon();
 
     $query="select m.medida, format(ddo.cantidad_despacho,'#,0')as despacho from despacho_det_orden as ddo
     inner join orden as o on o.id_orden=ddo.id_orden
-    inner join medida as m on m.id_medida=ddo.idmedida";
+    inner join medida as m on m.id_medida=ddo.idmedida order by m.medida";
 
     $result= sqlsrv_query($conn,$query);
 
@@ -43,7 +43,9 @@ $conn = BaseDatos::getCon();
     var trace1 = {
         x: datosX,
         y: datosY,
-  type: 'scatter'
+  //type: 'scatter'
+  type: 'bar'
+
 };   
     var data = [trace1];
     

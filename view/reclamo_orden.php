@@ -126,7 +126,7 @@ $_SESSION['idusuario'];
     <div class="form-group row">
                             <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Detalle de Reclamo</label>
                             <div class="col-md-6 col-sm-6 ">
-                            <textarea class="form-control col" rows="5" cols="50" id="reclamo" name="reclamo">Aqui</textarea>                             
+                            <textarea class="form-control col" rows="5" cols="50" id="reclamo" name="reclamo" placeholder="Observaciones Aqui"></textarea>                             
                             </div>
                           </div>     
 
