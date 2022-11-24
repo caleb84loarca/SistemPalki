@@ -1,6 +1,7 @@
 <?php
  require_once "../controllers/BaseDatos.php"; 
 
+
  $idorden=$_POST['orden'];
  $idproducto=$_POST['idproducto'];
  $idmedida=$_POST['idmedida'];   
@@ -68,7 +69,6 @@ function actualizarmedida($altura,$id_product,$id_altura){
 }  
 
 
-  
 
 
 

@@ -1,7 +1,7 @@
 <?php
  require_once "../controllers/BaseDatos.php"; 
 
- $orden=$_POST['orden'];
+ $orden=$_POST['ordenCliente'];
  $idproducto=$_POST['idproducto'];
  $idmedida=$_POST['idmedida'];   
  $cantdespacho=$_POST['cant_despacho']; 
@@ -15,13 +15,13 @@
  
 if( isset($orden) && isset($cantdespacho) ){
 
-    aniadir($cantdespacho,$wkdespacho,$wkllegada,$fechadespacho,$fechallega,$orden,$idmedida,$idproducto);
+    AgregarDespachoOrden($cantdespacho,$wkdespacho,$wkllegada,$fechadespacho,$fechallega,$orden,$idmedida,$idproducto);
 
-   print "<script> window.location='../view/despacho_orden.php'; </script>";
+   print "<script> window.location='../view/despacho_orden.php'; alert('Registro Operado Exitosamente!!'); </script>";
 }
 
 
-function aniadir($cantdespacho,$wkdespacho,$wkllegada,$fechadespacho,$fechallega,$orden,$idmedida,$idproducto){
+function AgregarDespachoOrden($cantdespacho,$wkdespacho,$wkllegada,$fechadespacho,$fechallega,$orden,$idmedida,$idproducto){
    
     $base = new BaseDatos();
     $conexion=$base->getCon();

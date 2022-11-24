@@ -2,7 +2,7 @@
 require_once  "plantilla/plantilla_central.php";
 require_once "../controllers/BaseDatos.php";
 require_once "../model/ClienteDatos.php";
-session_start();
+#session_start();
 
 $mostrar = mostrarcliente($_GET['id']);
 

@@ -3,7 +3,7 @@
 require_once  "plantilla/plantilla_central.php"; 
 require_once "../controllers/BaseDatos.php"; 
 require_once "../model/ProductoDatos.php";
-session_start();
+#session_start();
 
 $mostrar = mostrarproducto($_GET['id']);
 ?> 

@@ -2,7 +2,7 @@
 require_once "../controllers/BaseDatos.php";
 
 //metodo de aniadir datos
-
+   
  $nom1=$_POST['clien_nom1']; 
  $nom2=$_POST['clien_nom2']; 
  $ape1=$_POST['clien_ape1']; 
@@ -15,6 +15,7 @@ require_once "../controllers/BaseDatos.php";
  $tel3=$_POST['telefono3']; 
  $idpais=str_replace(' ','',$_POST['idpais']); 
  $fechaingreso=$_POST['fechaingreso'];   
+ 
 
 if( isset($nom1) && isset($compania) && isset($email) ){
 
@@ -36,7 +37,7 @@ values('".$nom1."','".$nom2."','".$ape1."','".$ape2."','".$compania."','".$direc
 }
 
 
-//datos para actualizar productos
+//datos para actualizar CLIENTE
 
 $idclient=$_POST['idcliente'];
 $clienombre=$_POST['clie_nom1']; 
@@ -92,6 +93,27 @@ $sql = "update cliente set clien_nom1='".$clienombre."',clien_nom2='".$clienombr
             $fila['fecha_ingreso']
         ];
     }  
+
+  //aqui cargamos el select con la lista de subclientes dependiendo del cliente
+  
+  $Cliente = $_REQUEST["Cliente"];
+  $base = new BaseDatos();
+  $conexion=$base->getCon();
+  if ($Cliente == null) {
+      $Cliente = 0;
+      $query = "select id_subcliente, nom_subcliente from subcliente where cliente_id_cliente =" . $Cliente." order by nom_subcliente asc";
+  } else {
+
+      $query = "select id_subcliente, nom_subcliente from subcliente where cliente_id_cliente =" . $Cliente." order by nom_subcliente asc";
+  }
+    $resultado = sqlsrv_query($conexion, $query);
+        while ($valores = sqlsrv_fetch_array($resultado)) {
+      // En esta sección estamos llenando el select con datos extraidos de una base de datos.
+  ?>
+ 
+      <option value=" <?php echo $valores['id_subcliente']; ?>"> <?php echo $valores['nom_subcliente']; ?> </option>';
+
+  <?php } ?>
 
 
 ?>

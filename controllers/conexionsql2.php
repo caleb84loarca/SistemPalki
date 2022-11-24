@@ -58,4 +58,4 @@ if (empty($_POST["nombreusuario"]) || empty($_POST["password"]) )  {
 	
 	sqlsrv_free_result($query);
 	sqlsrv_close($conexion);
-?>
+	}?>

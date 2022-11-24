@@ -1,7 +1,7 @@
 <?php
  require_once "../controllers/BaseDatos.php"; 
 
- $idcliente=str_replace(' ','',$_POST['idcliente']); 
+ $idcliente=$_POST['cliente']; 
  $fechaingreso=$_POST['fechaingreso'];
  $fechacliente=$_POST['fechafinal'];
  

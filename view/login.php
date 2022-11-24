@@ -53,7 +53,7 @@
               <div>                
                   <button type="submit" class="btn btn-round btn-secondary">Acceder</button>  
 
-                  <a class="reset_pass" href="../sistempalki/error404.php">Olvido su password?</a>
+                  <a class="reset_pass" href="mailto:helpdesk@palki.com.gt?subject=Recuperación%20de%20contraseña&body=Hola%20espero%20se%20encuentren%20bien%20:%20Necesito%20por%20favor%20recuperar%20mi%20contraseña.%20Agradeciendo%20su%20ayuda%20en%20el%20inconveniente.%20Saludos%20coordiales%2C">Olvido su password?</a>
               </div>
 
               <div class="clearfix"></div>

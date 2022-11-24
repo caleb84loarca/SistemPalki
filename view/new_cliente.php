@@ -1,7 +1,7 @@
 <!--ENCABEZADO DE PLANILLA-->
 <?php 
 require_once  "plantilla/plantilla_central.php";
-session_start(); ?> 
+#session_start(); ?> 
  <!-- page content -->
   
  
