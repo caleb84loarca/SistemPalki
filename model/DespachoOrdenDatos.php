@@ -23,12 +23,18 @@ if( isset($orden) && isset($cantdespacho) ){
 
 function AgregarDespachoOrden($cantdespacho,$wkdespacho,$wkllegada,$fechadespacho,$fechallega,$orden,$idmedida,$idproducto){
    
-    $base = new BaseDatos();
-    $conexion=$base->getCon();
-    $sql = "insert into despacho_det_orden (cantidad_despacho,wk_despacho,wk_arribo,fecha_etd,fecha_eta, id_orden, idmedida, idproducto) VALUES (".$cantdespacho.",".$wkdespacho.",".$wkllegada.",'".$fechadespacho."','".$fechallega."',".$orden.",".$idmedida.",".$idproducto.")";
-    
-    $resultado = sqlsrv_query($conexion,$sql);  
-
+    try {
+        $base = new BaseDatos();
+        $conexion=$base->getCon();
+        $sql = "insert into despacho_det_orden (cantidad_despacho,wk_despacho,wk_arribo,fecha_etd,fecha_eta, id_orden, idmedida, idproducto) VALUES (".$cantdespacho.",".$wkdespacho.",".$wkllegada.",'".$fechadespacho."','".$fechallega."',".$orden.",".$idmedida.",".$idproducto.")";
+        
+        $resultado = sqlsrv_query($conexion,$sql);  
+    } catch (Throwable $th) {
+        throw $th;
+    }finally
+    {
+        sqlsrv_close($conexion);
+    }
     return $resultado;
 }
 

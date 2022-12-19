@@ -49,7 +49,7 @@ $_SESSION['idusuario'];
                                         while ($valores = sqlsrv_fetch_array($resultado)) {
                                             // En esta sección estamos llenando el select con datos extraidos de una base de datos.
                                         ?>
-                                            <option value=" <?php echo $valores['id_cliente']; ?>"> <?php echo $valores['clien_compania']; ?> </option>';
+                                            <option value="<?php echo $valores['id_cliente']; ?>"> <?php echo $valores['clien_compania']; ?> </option>';
 
                                         <?php } ?>
                                     </select>
@@ -67,7 +67,7 @@ $_SESSION['idusuario'];
 
                                     <select class="form-control" id="ordenCliente" name="ordenCliente">
                                         <option value="0"> Seleccionar de la lista </option>;
-                                       
+
                                     </select>
 
                                 </div>
@@ -80,7 +80,7 @@ $_SESSION['idusuario'];
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
 
-                                    <select class="form-control" id="idproducto" name="idproducto">
+                                    <select class="form-control" id="idproducto" name="idproducto" onclick="CargarMedida(this.value);">
                                         <option value="0"> Seleccionar de la lista </option>;
                                         <?php
 
@@ -107,18 +107,7 @@ $_SESSION['idusuario'];
 
                                     <select class="form-control" id="idmedida" name="idmedida">
                                         <option value="0"> Seleccionar de la lista </option>;
-                                        <?php
 
-                                        $base = new BaseDatos();
-                                        $conexion = $base->getCon();
-                                        $query = "select * from medida";
-                                        $resultado = sqlsrv_query($conexion, $query);
-                                        while ($valores = sqlsrv_fetch_array($resultado)) {
-                                            // En esta sección estamos llenando el select con datos extraidos de una base de datos.
-                                        ?>
-                                            <option value=" <?php echo $valores['id_medida']; ?>"> <?php echo $valores['medida']; ?> </option>';
-
-                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -173,13 +162,11 @@ $_SESSION['idusuario'];
 
 
 
-
-
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Despacho de &Oacuterdenes (Detalle)</h3>
+                <h3>Reclamos de &Oacuterdenes</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -197,6 +184,10 @@ $_SESSION['idusuario'];
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
                                     </ul>
+                                    <div class="col-md-10 text-right">
+                                        <button id="exporttable" class="btn btn-success"> <i class="fa fa-file-excel-o"></i> Excel </button></a>
+                                        <button id="exportpdf" class="btn btn-info"> <i class="fa fa-file-pdf-o"></i> PDF </button></a>
+                                    </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
@@ -204,11 +195,12 @@ $_SESSION['idusuario'];
                                     <table id="tbempaque" class="mdl-data-table" style="width:100%" table-condensed>
                                         <thead>
                                             <tr>
+                                                <th>CLIENTE</th>
                                                 <th>ORDEN INTERNA</th>
                                                 <th>PRODUCTO</th>
                                                 <th>MEDIDA</th>
-                                                <th>CANTIDAD DESPACHADA</th>
-                                                <th>SEMANA DESPACHO</th>
+                                                <th>CANTIDAD RECLAMADA</th>
+                                                <th>SEMANA RECLAMO</th>
 
                                                 <th>ACCIONES</th>
                                             </tr>
@@ -218,38 +210,41 @@ $_SESSION['idusuario'];
                                             <?php
 
                                             $conexion = BaseDatos::getCon();
-                                            $query = "select ddo.cantidad_despacho,ddo.wk_despacho, ddo.fecha_etd, o.ord_nombre,m.medida, p.producto from despacho_det_orden as ddo
-            inner join orden as o on o.id_orden=ddo.id_orden
-            inner join detalle_orden as do on do.orden_id_orden=o.id_orden
-            inner join producto as pr on pr.id_producto=do.producto_id_producto
-            inner join medida as m on m.id_medida=do.medida_id_medida
-            inner join producto as p on p.id_producto=do.producto_id_producto";
+                                            $query = "select rec.id_reclamo, c.clien_compania as cliente, sc.nom_subcliente,  o.ord_nombre, datepart(YEAR, rec.fecha_reclamo) as ANIO, DATEPART(ISO_WEEK, rec.fecha_reclamo) as semana_reclamo, p.producto, m.medida,  rec.cantidad_reclamada, rec.id_estado  from reclamos as rec
+                                            inner join orden as o on o.id_orden = rec.orden_id_orden
+                                            inner join medida as m on m.id_medida = rec.id_medida
+                                            inner join producto as p on p.id_producto = rec.id_producto
+                                            inner join cliente as c on c.id_cliente = o.cliente_id_cliente
+                                            inner join subcliente as sc on sc.id_subcliente = o.subcliente_id_subcliente where id_estado = 7";
                                             $resultado = sqlsrv_query($conexion, $query);
 
                                             while ($fila = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
                                             ?>
                                                 <tr>
+
+                                                    <td> <?php echo $fila['cliente'];  ?> </td>
                                                     <td> <?php echo $fila['ord_nombre'];  ?> </td>
                                                     <td> <?php echo $fila['producto'];  ?> </td>
                                                     <td> <?php echo $fila['medida'];  ?> </td>
-                                                    <td> <?php echo $fila['cantidad_despacho'];  ?> </td>
-                                                    <td> <?php echo $fila['wk_despacho'];  ?> </td>
+                                                    <td> <?php echo $fila['cantidad_reclamada'];  ?> </td>
+                                                    <td> <?php echo $fila['semana_reclamo'];  ?> </td>
 
 
                                                     <td>
-                                                        <a href="#.php?id=<?php echo $fila['ord_nombre']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
-                                                        <!-- <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>  -->
+                                                        <a href="detalle_reclamo.php?idreclamo=<?php echo $fila['id_reclamo']; ?>" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Ver Detalle</a>
                                                     </td>
                                                 </tr>
-                                            <?php  }; ?>
+                                            <?php  };
+                                            sqlsrv_close($conexion); ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th>CLIENTE</th>
                                                 <th>ORDEN INTERNA</th>
                                                 <th>PRODUCTO</th>
                                                 <th>MEDIDA</th>
-                                                <th>CANTIDAD DESPACHADA</th>
-                                                <th>SEMANA DESPACHO</th>
+                                                <th>CANTIDAD RECLAMADA</th>
+                                                <th>SEMANA RECLAMO</th>
 
                                                 <th>ACCIONES</th>
                                             </tr>
@@ -281,6 +276,7 @@ $_SESSION['idusuario'];
 
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.material.min.js"></script>
+<script src="js/jquery.table2excel.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -315,6 +311,42 @@ $_SESSION['idusuario'];
         xlm.open("GET", "../model/ObtenerDetalleDespacho.php?idOrden=" + valor);
         xlm.send();
     }
+
+    function CargarMedida(valor) {
+
+        const xml = new XMLHttpRequest();
+
+        xml.onload = function() {
+            document.getElementById("idmedida").innerHTML = this.responseText;
+        }
+
+
+        xml.open("GET", "../model/ObtenerMedidaPlanta.php?idPlanta=" + valor);
+        xml.send();
+
+    };
+
+    //funcion para exportar tabla a excel
+    $(function() {
+        $('#exporttable').click(function(e) {
+            var table = $('#tbempaque');
+            if (table && table.length) {
+                $(table).table2excel({
+                    exclude: ".noExl",
+                    name: "Excel Document Name",
+                    filename: "Tabla Reclamo" + new Date().toISOString() + ".xls",
+
+                    //filename: "Tabla de Ordenes" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xlsx",
+                    fileext: ".xls",
+                    exclude_img: true,
+                    exclude_links: true,
+                    exclude_inputs: true,
+                    preserveColors: false
+                });
+            }
+        });
+
+    });
 </script>
 <!-- cierre script de tabla-->
 <!--PIE DE PAGINA DE PLANILLA-->

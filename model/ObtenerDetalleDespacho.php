@@ -1,9 +1,6 @@
-<table id="TbDatosSaldo" class="mdl-data-table" style="width:100%">
+<!-- <table id="TbDatosSaldo" class="mdl-data-table" style="width:100%"> -->
+<table id="datatable-buttons"  class="table table-striped table-bordered"  style="width:100%" table-condensed>
 
-
-
-
-                                                  
 <thead>
     <tr>
       
@@ -50,7 +47,7 @@ group by o.ord_nombre, p.producto, m.medida, do.cantidad_unidades, ddo.cantidad_
          
         </tr>
 
-    <?php }; ?>
+    <?php };  sqlsrv_close($conexion); ?>
 </tbody>
 <tfoot>
     <tr>

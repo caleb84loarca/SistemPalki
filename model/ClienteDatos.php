@@ -63,36 +63,18 @@ if( isset($idclient) && isset($cliemail) ){
 function actualizarcliente($clienombre,$clienombre2,$clieap,$clieape,$cliecompa,$cliedire,$cliemail,$clietel,$clietel2,$clietel3,$cliepais,$idclient){
 
     $conn = BaseDatos::getCon();
-$sql = "update cliente set clien_nom1='".$clienombre."',clien_nom2='".$clienombre2."',clien_ape1='".$clieap."',clien_ape2='".$clieape."',clien_compania='".$cliecompa."',clien_direccion='".$cliedire."',clien_correo='".$cliemail."',clien_tel1='".$clietel."',clien_tel2='".$clietel2."',clien_tel3='".$clietel3."',pais_id_pais='".$cliepais."' where id_cliente=".$idclient;
+    $sql = "update cliente set clien_nom1='".$clienombre."',
+        clien_nom2='".$clienombre2."',clien_ape1='".$clieap."',
+        clien_ape2='".$clieape."',clien_compania='".$cliecompa."',
+        clien_direccion='".$cliedire."',clien_correo='".$cliemail."',
+        clien_tel1='".$clietel."',clien_tel2='".$clietel2."',
+        clien_tel3='".$clietel3."',pais_id_pais='".$cliepais."' where id_cliente=".$idclient;
     
-    $resultado = sqlsrv_query($conn,$sql) or die(sqlsrv_error()); 
+    $resultado = sqlsrv_query($conn,$sql); 
     return $resultado;
  }   
 
 
-
-    function mostrarcliente($id_cliente){
-        $conn = BaseDatos::getCon();
-        $sql = "Select * from cliente where id_cliente='".$id_cliente."'; ";
-        $resultado = sqlsrv_query($conn,$sql) or die(sqlsrv_error()); 
-        $fila = sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC);
-           
-        return [
-            $fila['id_cliente'],
-            $fila['clien_nom1'],
-            $fila['clien_nom2'],
-            $fila['clien_ape1'],
-            $fila['clien_ape2'],
-            $fila['clien_compania'],
-            $fila['clien_direccion'],
-            $fila['clien_correo'],
-            $fila['clien_tel1'],
-            $fila['clien_tel2'],
-            $fila['clien_tel3'],
-            $fila['pais_id_pais'],
-            $fila['fecha_ingreso']
-        ];
-    }  
 
   //aqui cargamos el select con la lista de subclientes dependiendo del cliente
   
@@ -111,7 +93,7 @@ $sql = "update cliente set clien_nom1='".$clienombre."',clien_nom2='".$clienombr
       // En esta sección estamos llenando el select con datos extraidos de una base de datos.
   ?>
  
-      <option value=" <?php echo $valores['id_subcliente']; ?>"> <?php echo $valores['nom_subcliente']; ?> </option>';
+      <option value="<?php echo $valores['id_subcliente']; ?>"> <?php echo $valores['nom_subcliente']; ?> </option>';
 
   <?php } ?>
 

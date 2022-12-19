@@ -19,7 +19,7 @@ if( isset($idempaque) && isset($modifempaque) ){
 
     actualizarempaque($modifempaque,$idempaque);
 
-   print "<script> alert('Empaque modificado Exitosamente!!'); window.location='../view/new_empaque.php'; </script>";
+   print "<script> window.location='../view/new_empaque.php'; alert('Empaque modificado Exitosamente!!'); </script>";
 }
 
 

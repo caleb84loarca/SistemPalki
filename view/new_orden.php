@@ -10,6 +10,8 @@ $base = new BaseDatos();
 $_SESSION['idusuario'];
 ?>
 
+
+
 <!-- page content -->
 
 <div class="right_col" role="main">
@@ -67,7 +69,7 @@ $_SESSION['idusuario'];
 
                                     <select class="form-control" id="idsubcliente" name="idsubcliente">
                                         <option value="0"> Seleccionar Subcliente de la lista </option>
-                                     
+
                                     </select>
                                 </div>
                             </div>
@@ -185,6 +187,7 @@ $_SESSION['idusuario'];
 </div>
 
 
+ <!--   tabla de datos -->
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
@@ -203,25 +206,32 @@ $_SESSION['idusuario'];
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>Tabla de Datos</h2>
+
                                     <ul class="nav navbar-right panel_toolbox">
+                                 <!--    <button id="exporttable" class="btn btn-success"> <i class="fa fa-file-excel-o"></i> Excel </button></a>
+                                      <button id="exportpdf" class="btn btn-info"> <i class="fa fa-file-pdf-o"></i> PDF </button></a>     -->
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
+                                        </li>                                      
                                     </ul>
+                                  
                                     <div class="clearfix"></div>
+
                                 </div>
                                 <div class="x_content">
 
-                                    <table id="tbempaque" class="mdl-data-table" style="width:100%" table-condensed>
+
+                                   <!-- <table id="tbempaque" class="mdl-data-table" class="table table-striped table-bordered"  style="width:100%" table-condensed> -->
+                                    <table id="datatable-buttons"  class="table table-striped table-bordered"  style="width:100%" table-condensed>
                                         <thead>
                                             <tr>
                                                 <th>ORDEN INTERNO</th>
                                                 <th>ORDEN SEGUN CLIENTE</th>
                                                 <th>STATUS DE ORDEN</th>
                                                 <th>CLIENTE</th>
-                                             <!--   <th>SUBCLIENTE</th> -->
+                                                <!--   <th>SUBCLIENTE</th> -->
                                                 <th>ORDEN DE DESTINO</th>
                                                 <th>TIPO DE EMBARQUE</th>
-                                               <!-- <th>OBSERVACIONES</th> -->
+                                                <!-- <th>OBSERVACIONES</th> -->
                                                 <th>ACCIONES</th>
                                             </tr>
                                         </thead>
@@ -246,19 +256,21 @@ $_SESSION['idusuario'];
                                                     <td> <?php echo $fila['ord_nombreclie'];  ?> </td>
                                                     <td> <?php echo $fila['estado'];  ?> </td>
                                                     <td> <?php echo $fila['clien_compania'];  ?> </td>
-                                                   <!-- <td> <?php //echo $fila['nom_subcliente'];  ?> </td>  -->
+                                                    <!-- <td> <?php //echo $fila['nom_subcliente'];  
+                                                                ?> </td>  -->
                                                     <td> <?php echo $fila['ord_destino'];  ?> </td>
                                                     <td> <?php echo $fila['embarque'];  ?> </td>
-                                                  <!--  <td> <?php //echo $fila['observaciones'];  ?> </td> -->
+                                                    <!--  <td> <?php //echo $fila['observaciones'];  
+                                                                ?> </td> -->
 
                                                     <td>
                                                         <a href="modif_orden.php?idOrden=<?php echo $fila['id_orden']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
                                                         <a href="detalle_orden.php?idOrden=<?php echo $fila['id_orden']; ?>" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Ver Detalle</a>
-                                                       
+
                                                         <!-- <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>  -->
                                                     </td>
                                                 </tr>
-                                            <?php  }; sqlsrv_close( $conexion); ?>
+                                            <?php  };sqlsrv_close($conexion); ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -266,64 +278,118 @@ $_SESSION['idusuario'];
                                                 <th>ORDEN SEGUN CLIENTE</th>
                                                 <th>STATUS DE ORDEN</th>
                                                 <th>CLIENTE</th>
-                                              <!--  <th>SUBCLIENTE</th> -->
+                                                <!--  <th>SUBCLIENTE</th> -->
                                                 <th>ORDEN DE DESTINO</th>
                                                 <th>TIPO DE EMBARQUE</th>
-                                              <!--  <th>OBSERVACIONES</th> -->
+                                                <!--  <th>OBSERVACIONES</th> -->
                                                 <th>ACCIONES</th>
                                             </tr>
                                         </tfoot>
                                     </table>
 
-                                    <!-- script de tabla-->
-
-                                    <script src="js/jquery.dataTables.min.js"></script>
-                                    <script src="js/dataTables.material.min.js"></script>
-
-                                    <script>
-                                        $(document).ready(function() {
-                                            $('#tbempaque').DataTable({
-                                                autoWidth: false,
-                                                columnDefs: [{
-                                                    targets: ['_all'],
-                                                    className: 'mdc-data-table__cell'
-                                                }]
-                                            });
-                                        });
-                                    </script>
-                                    <!-- cierre script de tabla-->
-
-
-
                                 </div>
                             </div>
                         </div>
-
-                        <script>
-                            function ObtenerIdCliente(int) {
-                                const xhttp = new XMLHttpRequest();
-                                xhttp.onload = function() {
-                                    document.getElementById('idsubcliente').innerHTML = this.responseText;
-                                    
-                                }                               
-                               
-                                xhttp.open("GET", "../model/ClienteDatos.php?Cliente=" + int);
-
-                                xhttp.send();
-
-                            }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+            
+
+<br>
+<br>
+<!-- script de tabla-->
+
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.material.min.js"></script>
+<script src="js/jquery.table2excel.min.js"></script>
+
+ <!-- Datatables -->
+ <script src="plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="plugins/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="plugins/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="plugins/jszip/dist/jszip.min.js"></script>
+    <script src="plugins/pdfmake/build/pdfmake.min.js"></script>
+    <script src="plugins/pdfmake/build/vfs_fonts.js"></script>
+
+ 
+
+<script>
+    $(document).ready(function() {
+        $('#tbempaque').DataTable({
+            autoWidth: false,
+            columnDefs: [{
+                targets: ['_all'],
+                className: 'mdc-data-table__cell'
+            }]
+        });
+    });
+    //funcion para exportar tabla a excel con el boton oculto
+    $(function() {
+        $('#exporttable').click(function(e) {
+            var table = $('#tbempaque');
+            if (table && table.length) {
+                $(table).table2excel({
+                    exclude: ".noExl",
+                    name: "Excel Document Name",
+                    filename: "Tabla de Ordenes" + new Date().toISOString() + ".xlsx",
+
+                    //filename: "Tabla de Ordenes" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xlsx",
+                    fileext: ".xlsx",
+                    exclude_img: true,
+                    exclude_links: true,
+                    exclude_inputs: true,
+                    preserveColors: false
+                });
+            }
+        });
+
+    });
+</script>
+<!-- cierre script de tabla-->
 
 
-                            function ObtenerSubCliente() {
-                                let subcliente = document.getElementById('idsubcliente');
-                                console.log(subcliente.value);
-
-                            }
-                        </script>
 
 
 
-                        <!-- /page content -->
-                        <!--PIE DE PAGINA DE PLANILLA-->
+<script>
+    function ObtenerIdCliente(int) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById('idsubcliente').innerHTML = this.responseText;
+
+        }
+
+        xhttp.open("GET", "../model/ClienteDatos.php?Cliente=" + int);
+
+        xhttp.send();
+
+    }
+
+
+
+
+    function ObtenerSubCliente() {
+        let subcliente = document.getElementById('idsubcliente');
+        console.log(subcliente.value);
+
+    }
+</script>
+
+
+
+<!-- /page content -->
+<!--PIE DE PAGINA DE PLANILLA-->

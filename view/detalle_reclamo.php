@@ -2,19 +2,21 @@
 <?php
 require_once  "plantilla/plantilla_central.php";
 require_once "../controllers/BaseDatos.php";
-require_once "../model/OrdenDatos.php";
+
 #session_start();
 
 $base = new BaseDatos();
 
+
 #session_start();
 $_SESSION['idusuario'];
-$VerOrden = $_GET["idOrden"];
+$VerReclamo = $_GET["idreclamo"]; 
 
-
-if (isset($_GET["idDetalle"])) {
+if ( isset($verReclamo)) {
     return 0;
 };
+
+
 
 ?>
 
@@ -26,7 +28,7 @@ if (isset($_GET["idDetalle"])) {
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Datos Cargados a &Oacuterden</h3>
+                <h3>Reclamo al Detalle</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -34,12 +36,11 @@ if (isset($_GET["idDetalle"])) {
         <div class="row">
             <div class="col-md-12 col-sm-12" align="center">
                 <div class="x_panel">
-
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2></h2>
+                                    <h2>Datos </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -47,46 +48,49 @@ if (isset($_GET["idDetalle"])) {
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%" table-condensed>
-                                        <!-- <table id="tbDetalleOrden" class="mdl-data-table" style="width:100%" table-condensed> 
-                                    -->
+
+                                    <table id="tbDetalleReclamo" class="mdl-data-table" style="width:100%" table-condensed>
                                         <thead>
                                             <tr>
                                                 <th>STATUS DE ORDEN</th>
                                                 <th>SUBCLIENTE</th>
-                                                <th>PRODUCTO/ARTICULOE</th>
+                                                <th>PRODUCTO/ARTICULO</th>
                                                 <th>CANTIDAD DE UNIDADES</th>
                                                 <th>MEDIDA</th>
+                                                <th>COMENTARIOS</th>
                                                 <th>ACCIONES</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
 
-                                            <?php
+                                            <?php                                                                                    
 
                                             $conexion = BaseDatos::getCon();
-                                            $query = "select do.id_detalleorden, es.estado as estadorden, sub.nom_subcliente, p.id_producto, p.producto, do.cantidad_unidades, m.id_medida, m.medida, o.id_orden, do.estado from detalle_orden as do
-                                            inner join producto as p on p.id_producto = do.producto_id_producto
-                                            inner join medida as m on m.id_medida = do.medida_id_medida
-                                            inner join orden as o on o.id_orden = do.orden_id_orden
-                                            inner join subcliente as sub on sub.id_subcliente = o.subcliente_id_subcliente
-                                            inner join estado_orden as es on es.id_estado = o.estado_id_estado
-                                             where orden_id_orden = $VerOrden and do.estado is null";
+                                            $query = "select rec.id_reclamo, c.clien_compania as cliente, sc.nom_subcliente,  o.ord_nombre, datepart(YEAR, rec.fecha_reclamo) as ANIO, DATEPART(ISO_WEEK, rec.fecha_reclamo) as semana_reclamo, p.producto, m.medida,  rec.cantidad_reclamada, rec.id_estado, rec.reclamo  from reclamos as rec
+                                            inner join orden as o on o.id_orden = rec.orden_id_orden
+                                            inner join medida as m on m.id_medida = rec.id_medida
+                                            inner join producto as p on p.id_producto = rec.id_producto
+                                            inner join cliente as c on c.id_cliente = o.cliente_id_cliente
+                                            inner join subcliente as sc on sc.id_subcliente = o.subcliente_id_subcliente
+											where rec.id_reclamo=$VerReclamo and rec.id_estado=7";
+
+                                          
                                             $resultado = sqlsrv_query($conexion, $query);
 
                                             while ($fila = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
                                             ?>
                                                 <tr>
-                                                    <td> <?php echo $fila['estadorden'];  ?> </td>
+                                                    <td> <?php echo $fila['cliente'];  ?> </td>
                                                     <td> <?php echo $fila['nom_subcliente'];  ?> </td>
                                                     <td> <?php echo $fila['producto'];  ?> </td>
-                                                    <td> <?php echo $fila['cantidad_unidades'];  ?> </td>
+                                                    <td> <?php echo $fila['cantidad_reclamada'];  ?> </td>
                                                     <td> <?php echo $fila['medida'];  ?> </td>
+                                                    <td> <?php echo $fila['reclamo'];  ?> </td>
 
                                                     <td>
-                                                        <a href="modif_detalleorden.php?idDetalle=<?php echo $fila['id_detalleorden']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
-                                                        <a href="../model/Eliminar_DetalleOrden.php?idDetalle=<?php echo $fila['id_detalleorden']; ?>&idOrden=<?php echo $VerOrden; ?>" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>
+                                                        <a href="modif_reclamo.php?id=<?php echo $fila['id_reclamo']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
+                                                        <a href="../model/Eliminar_ReclamoDatos.php?id=<?php echo $fila['id_reclamo']; ?> " class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>
                                                     </td>
                                                 </tr>
                                             <?php  };
@@ -96,9 +100,10 @@ if (isset($_GET["idDetalle"])) {
                                             <tr>
                                                 <th>STATUS DE ORDEN</th>
                                                 <th>SUBCLIENTE</th>
-                                                <th>PRODUCTO/ARTICULOE</th>
+                                                <th>PRODUCTO/ARTICULO</th>
                                                 <th>CANTIDAD DE UNIDADES</th>
                                                 <th>MEDIDA</th>
+                                                <th>COMENTARIOS</th>
                                                 <th>ACCIONES</th>
                                             </tr>
                                         </tfoot>
@@ -114,7 +119,7 @@ if (isset($_GET["idDetalle"])) {
 
     <div class="form-group row" aling="right">
         <div class="col-md-6 col-sm-6 ">
-            <a class="btn btn-secondary" href="new_orden.php" role="button">Regresar</a>
+            <a class="btn btn-secondary" href="reclamo_orden.php" role="button">Regresar</a>
         </div>
     </div>
 
@@ -127,26 +132,9 @@ if (isset($_GET["idDetalle"])) {
 <script src="js/jquery.dataTables.min.js"></script>
 <script src="js/dataTables.material.min.js"></script>
 
-<!-- Datatables -->
-<script src="plugins/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="plugins/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-<script src="plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
-<script src="plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-<script src="plugins/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-<script src="plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-<script src="plugins/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-<script src="plugins/jszip/dist/jszip.min.js"></script>
-<script src="plugins/pdfmake/build/pdfmake.min.js"></script>
-<script src="plugins/pdfmake/build/vfs_fonts.js"></script>
-
 <script>
     $(document).ready(function() {
-        $('#tbDetalleOrden').DataTable({
+        $('#tbDetalleReclamo').DataTable({
             autoWidth: false,
             columnDefs: [{
                 targets: ['_all'],

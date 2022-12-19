@@ -1,26 +1,26 @@
 <?php
  require_once "../controllers/BaseDatos.php"; 
 
- $idcliente=$_POST['cliente']; 
+ $idcliente=$_POST['idcliente']; 
  $fechaingreso=$_POST['fechaingreso'];
- $fechacliente=$_POST['fechafinal'];
+ $fechaFinal=$_POST['fechafinal'];
  
  
  
 if( isset($idcliente) && isset($fechaingreso) ){
 
-    mostrarorden($idcliente,$fechaingreso,$fechafinal);
+    mostrarorden($idcliente,$fechaingreso,$fechaFinal);
 
    print "<script> window.location='../view/reporte_orden.php'; </script>";
 }
 
 
-function consultaorden($idcliente,$fechaingreso,$fechafinal){
+function consultaorden($idcliente,$fechaingreso,$fechaFinal){
    
     $base = new BaseDatos();
     $conexion=$base->getCon();
     $sql = "select * from orden
-    where fecha_orden between '".$fechaingreso."' and '".$fechafinal."' and cliente_id_cliente=".$idcliente;
+    where fecha_orden between '".$fechaingreso."' and '".$fechaFinal."' and cliente_id_cliente=".$idcliente;
     
     $resultado = sqlsrv_query($conexion,$sql);  
 

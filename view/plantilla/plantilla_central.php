@@ -42,6 +42,14 @@ if ($_SESSION['nombre'] == null) {
   <link rel="stylesheet" href="css/material-components-web.min.css">
   <link rel="stylesheet" href="css/dataTables.material.min.css">
 
+   <!-- Datatables -->
+
+    <link href="plugins/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="plugins/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="plugins/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="plugins/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="plugins/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body class="nav-md footer_fixed">

@@ -1,7 +1,9 @@
 <!--ENCABEZADO DE PLANILLA-->
 <?php
 require_once  "plantilla/plantilla_central.php";
-require_once "../controllers/BaseDatos.php";
+require_once "../model/Obtener_DespachoDatos.php";
+
+$Dato = ObtenerDespachoDatos($_GET['id']);
 
 #session_start();
 $_SESSION['idusuario'];
@@ -13,7 +15,7 @@ $_SESSION['idusuario'];
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Despacho de &Oacuterden</h3>
+                <h3>Modificar Despacho de &Oacuterden</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -30,44 +32,26 @@ $_SESSION['idusuario'];
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <form class="" action="../model/DespachoOrdenDatos.php" method="post" novalidate>
 
 
+                        <form class="" action="../model/modif_det_despachoDatos.php?id=<?php echo $Dato[0]; ?>" method="post" novalidate>                        
 
                             <div class="form-group row">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Seleccionar Cliente <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Cliente <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
 
-                                    <select class="form-control" id="cliente" name="cliente" onclick="CargarOrdenes(this.value);">
-                                        <option value="0"> Seleccionar de la lista </option>;
-                                        <?php
-
-                                        $base = new BaseDatos();
-                                        $conexion = $base->getCon();
-                                        $query = "select id_cliente, clien_compania from cliente order by clien_compania asc";
-                                        $resultado = sqlsrv_query($conexion, $query);
-                                        while ($valores = sqlsrv_fetch_array($resultado)) {
-                                            // En esta sección estamos llenando el select con datos extraidos de una base de datos.
-                                        ?>
-                                            <option value=" <?php echo $valores['id_cliente']; ?>"> <?php echo $valores['clien_compania']; ?> </option>';
-
-                                        <?php };  ?>
-                                    </select>
-
+                                    <input type="text" id="NomCliente" required="required" class="form-control" name="NomCliente" value="<?php echo $Dato[1]; ?>" disabled>                                      
+                                          
                                 </div>
                             </div>
 
 
                             <div class="form-group row">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Ordenes de Cliente <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Orden de Cliente <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-
-                                    <select class="form-control" id="ordenCliente" name="ordenCliente">
-                                        <option value="0"> Seleccionar de la lista </option>;
-
-                                    </select>
+                                    <input type="text" id="NomCliente" required="required" class="form-control" name="cant_despacho" value="<?php echo $Dato[3]; ?>" disabled>                                   
 
                                 </div>
                             </div>
@@ -80,7 +64,7 @@ $_SESSION['idusuario'];
                                 <div class="col-md-6 col-sm-6 ">
 
                                     <select class="form-control" id="idproducto" name="idproducto" onclick="CargarMedida(this.value);">
-                                        <option value="0"> Seleccionar de la lista </option>;
+                                        <option value="<?php echo $Dato[4]; ?>" selected> <?php echo $Dato[5]; ?> </option>;
                                         <?php
 
                                         $base = new BaseDatos();
@@ -93,7 +77,7 @@ $_SESSION['idusuario'];
                                         ?>
                                             <option value=" <?php echo $valores['id_producto']; ?>"> <?php echo $valores['producto']; ?> </option>';
 
-                                        <?php }; ?>
+                                        <?php }; sqlsrv_close($conexion); ?>
                                     </select>
                                 </div>
                             </div>
@@ -106,7 +90,7 @@ $_SESSION['idusuario'];
                                 <div class="col-md-6 col-sm-6 ">
 
                                     <select class="form-control" id="idmedida" name="idmedida">
-                                        <option value="0"> Seleccionar de la lista </option>;
+                                        <option value="<?php echo $Dato[6]; ?>" selected> <?php echo $Dato[7]; ?> </option>;
 
                                     </select>
                                 </div>
@@ -116,7 +100,7 @@ $_SESSION['idusuario'];
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Cantidad Despachada <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="cant_despacho" required="required" class="form-control" name="cant_despacho">
+                                    <input type="text" id="cant_despacho" required="required" class="form-control" name="cant_despacho" value=" <?php echo $Dato[8]; ?>">
                                 </div>
                             </div>
 
@@ -124,7 +108,7 @@ $_SESSION['idusuario'];
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Fecha de Despacho<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" class='date' type="date" name="fechadespacho" required='required'>
+                                    <input class="form-control" class='date' type="date" name="fechadespacho" required='required' >
                                 </div>
                             </div>
 
@@ -149,7 +133,7 @@ $_SESSION['idusuario'];
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Semana de Llegada <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="wk_despacho" required="required" class="form-control" name="wk_llegada" value="<?php $semana = date("W") + 3;
+                                    <input type="text" id="wk_llegada" required="required" class="form-control" name="wk_llegada" value="<?php $semana = date("W") + 3;
                                                                                                                                             echo $semana . date("y"); ?>">
                                 </div>
                             </div>
@@ -161,6 +145,7 @@ $_SESSION['idusuario'];
                                         <br>
                                         <button type='submit' class="btn btn-primary">Registrar</button>
                                         <button type='reset' class="btn btn-success">Limpiar Formulario</button>
+                                        <button type='button' class="btn btn-danger" onClick="location.href='despacho_orden.php'">Cancelar</button> 
                                         <br>
                                     </div>
                                 </div>
@@ -173,107 +158,6 @@ $_SESSION['idusuario'];
     </div>
 </div>
 
-
-
-
-
-
-
-<div class="right_col" role="main">
-    <div class="">
-        <div class="page-title">
-            <div class="title_left">
-                <h3>Despacho de &Oacuterdenes (Detalle)</h3>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-
-        <div class="row">
-            <div class="col-md-12 col-sm-12" align="left">
-                <div class="x_panel">
-
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Tabla de Datos</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                       <!--     <button id="exporttable" class="btn btn-success"> <i class="fa fa-file-excel-o"></i> Excel </button></a>
-                                        <button id="exportpdf" class="btn btn-info"> <i class="fa fa-file-pdf-o"></i> PDF </button></a>  -->
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                    </ul>
-                                  
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-
-                                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%" table-condensed>
-                                        <!--   <table id="tbempaque" class="mdl-data-table" style="width:100%" table-condensed>  -->
-                                        <thead>
-                                            <tr>
-                                                <th>ORDEN INTERNA</th>
-                                                <th>PRODUCTO</th>
-                                                <th>MEDIDA</th>
-                                                <th>UND. DESPACHADA</th>
-                                                <th>SEMANA DESPACHO</th>
-
-                                                <th>ACCIONES</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <?php
-
-                                            $conexion = BaseDatos::getCon();
-                                            $query = "select ddo.id_det_despacho, o.id_orden, o.ord_nombre,p.producto, m.medida, format(ddo.cantidad_despacho,'#,0')as despacho, ddo.wk_despacho from despacho_det_orden as ddo
-                                                    inner join orden as o on o.id_orden=ddo.id_orden
-                                                    inner join producto as p on p.id_producto=ddo.idproducto
-                                                    inner join medida as m on m.id_medida=ddo.idmedida ";
-                                            $resultado = sqlsrv_query($conexion, $query);
-
-                                            while ($fila = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
-                                            ?>
-                                                <tr>
-                                                    <td> <?php echo $fila['ord_nombre'];  ?> </td>
-                                                    <td> <?php echo $fila['producto'];  ?> </td>
-                                                    <td> <?php echo $fila['medida'];  ?> </td>
-                                                    <td> <?php echo $fila['despacho'];  ?> </td>
-                                                    <td> <?php echo $fila['wk_despacho'];  ?> </td>
-
-
-                                                    <td>
-                                                        <a href="modif_despacho.php?id=<?php echo $fila['id_det_despacho']; ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
-                                                        <!-- <a href="#" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Eliminar</a>  -->
-                                                    </td>
-                                                </tr>
-                                            <?php  }; sqlsrv_close($conexion); ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ORDEN INTERNA</th>
-                                                <th>PRODUCTO</th>
-                                                <th>MEDIDA</th>
-                                                <th>UND. DESPACHADA</th>
-                                                <th>SEMANA DESPACHO</th>
-
-                                                <th>ACCIONES</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-
-
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <br>
 <br>

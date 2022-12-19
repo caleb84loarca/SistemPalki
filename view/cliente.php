@@ -1,107 +1,123 @@
 <?php require_once  "plantilla/plantilla_central.php";
-require_once "../controllers/BaseDatos.php"; 
+require_once "../controllers/BaseDatos.php";
 #session_start();
 
-?> 
+?>
 
 <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>Tabla de Clientes</h3>
-                        </div>                        
-                    </div>
-                    <div class="clearfix"></div>
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Tabla de Clientes</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
 
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12" align="center">
-                            <div class="x_panel">
+        <div class="row">
+            <div class="col-md-12 col-sm-12" align="center">
+                <div class="x_panel">
 
-<table id="tbclientes" class="mdl-data-table" style="width:100%">
-        <thead>
-            <tr>
-                <th>ID CLIENTE</th>
-                <th>NOMBRES</th>
-                <th>APELLIDOS</th>
-                <th>COMPAÑIA</th>
-                <th>DIRECCION</th>
-                <th>PAIS</th>
-                <th>CORREO / EMAIL</th>
-                <th>TELEFONOS</th>
-                <th>FECHA REGISTRO</th>
-                <th>ACCIONES</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php                
-                $conexion= BaseDatos::getCon();
-$sql ="Select c.id_cliente, concat(c.clien_nom1,' ',c.clien_nom2) as Nombres, concat(c.clien_ape1,' ',c.clien_ape2) as Apellidos, c.clien_compania,c.clien_direccion, p.nombre_pais, c.clien_correo, concat(c.clien_tel1,'; ',c.clien_tel2,'; ',c.clien_tel3) AS telefonos, c.fecha_ingreso from cliente as c inner join pais as p on p.id_pais=c.pais_id_pais";
-                
-               
-                $resultado = sqlsrv_query($conexion,$sql);
+                    <!-- <table id="tbclientes" class="mdl-data-table" style="width:100%"> -->
+                    <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%" table-condensed>
+                        <thead>
+                            <tr>
+                                <th>ID CLIENTE</th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <th>COMPAÑIA</th>
+                                <th>DIRECCION</th>
+                                <th>PAIS</th>
+                                <th>CORREO / EMAIL</th>
+                                <th>TELEFONOS</th>
+                                <th>FECHA REGISTRO</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $conexion = BaseDatos::getCon();
+                            $sql = "Select c.id_cliente, concat(c.clien_nom1,' ',c.clien_nom2) as Nombres, concat(c.clien_ape1,' ',c.clien_ape2) as Apellidos, c.clien_compania,c.clien_direccion, p.nombre_pais, c.clien_correo, concat(c.clien_tel1,'; ',c.clien_tel2,'; ',c.clien_tel3) AS telefonos, c.fecha_ingreso from cliente as c inner join pais as p on p.id_pais=c.pais_id_pais";
 
-                while($fila = sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC) ){
 
-             ?>
-            <tr>
-                <td> <?php echo $fila['id_cliente'];   ?> </td>
-                <td> <?php echo $fila['Nombres'];      ?> </td>
-                <td> <?php echo $fila['Apellidos'];    ?> </td>
-                <td> <?php echo $fila['clien_compania'];  ?> </td>
-                <td> <?php echo $fila['clien_direccion']; ?> </td>
-                <td> <?php echo $fila['nombre_pais'];  ?> </td>                
-                <td> <?php echo $fila['clien_correo']; ?> </td>
-                <td> <?php echo $fila['telefonos'];    ?> </td>              
-                <td> <?php echo $fecha = $fila['fecha_ingreso']->format('d/m/yy');  ?> </td>  
-                
-<td>          
-<a href="modif_cliente.php?id=<?php echo $fila['id_cliente']?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
+                            $resultado = sqlsrv_query($conexion, $sql);
 
-</td>             
-            </tr>
-          
-                <?php }; ?>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>ID CLIENTE</th>
-                <th>NOMBRES</th>
-                <th>APELLIDOS</th>
-                <th>COMPAÑIA</th>
-                <th>DIRECCION</th>
-                <th>PAIS</th>
-                <th>CORREO / EMAIL</th>
-                <th>TELEFONOS</th>
-                <th>FECHA REGISTRO</th>
-                <th>ACCIONES</th>
-            </tr>
-        </tfoot>
-    </table>
+                            while ($fila = sqlsrv_fetch_array($resultado, SQLSRV_FETCH_ASSOC)) {
 
-            <!-- script de tabla-->
+                            ?>
+                                <tr>
+                                    <td> <?php echo $fila['id_cliente'];   ?> </td>
+                                    <td> <?php echo $fila['Nombres'];      ?> </td>
+                                    <td> <?php echo $fila['Apellidos'];    ?> </td>
+                                    <td> <?php echo $fila['clien_compania'];  ?> </td>
+                                    <td> <?php echo $fila['clien_direccion']; ?> </td>
+                                    <td> <?php echo $fila['nombre_pais'];  ?> </td>
+                                    <td> <?php echo $fila['clien_correo']; ?> </td>
+                                    <td> <?php echo $fila['telefonos'];    ?> </td>
+                                    <td> <?php echo $fecha = $fila['fecha_ingreso']->format('d/m/yy');  ?> </td>
 
-            <script src="js/jquery.dataTables.min.js"></script>
-            <script src="js/dataTables.material.min.js"></script>
-           
-            <script>
-                $(document).ready(function() {
-                $('#tbclientes').DataTable( {
-                    autoWidth: false,
-                    columnDefs: [
-                        {
-                            targets: ['_all'],
-                            className: 'mdc-data-table__cell'
-                        }
-                    ]
-                } );
-            } );
-            </script>
-            <!-- cierre script de tabla-->
+                                    <td>
+                                        <a href="modif_cliente.php?id=<?php echo $fila['id_cliente'] ?>" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Modificar</a>
 
-                           
-                            </div>
-                        </div>
-                    </div>
+                                    </td>
+                                </tr>
+
+                            <?php }; ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID CLIENTE</th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <th>COMPAÑIA</th>
+                                <th>DIRECCION</th>
+                                <th>PAIS</th>
+                                <th>CORREO / EMAIL</th>
+                                <th>TELEFONOS</th>
+                                <th>FECHA REGISTRO</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 <div class="ln_solid"></div>
+
+
+<!-- script de tabla-->
+
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.material.min.js"></script>
+ <!-- Datatables -->
+ <script src="plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="plugins/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="plugins/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="plugins/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="plugins/jszip/dist/jszip.min.js"></script>
+    <script src="plugins/pdfmake/build/pdfmake.min.js"></script>
+    <script src="plugins/pdfmake/build/vfs_fonts.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#tbclientes').DataTable({
+            autoWidth: false,
+            columnDefs: [{
+                targets: ['_all'],
+                className: 'mdc-data-table__cell'
+            }]
+        });
+    });
+</script>
+<!-- cierre script de tabla-->

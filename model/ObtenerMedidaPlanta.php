@@ -15,4 +15,5 @@ while ($valores = sqlsrv_fetch_array($resultado)) {
 
 <?php
     };
+    
 ?>
