@@ -44,7 +44,7 @@ function actualizarmedida($altura,$id_product,$id_altura){
 
     $conn = BaseDatos::getCon();
     $sql = "update medida set medida ='".$altura."', producto_id_producto=".$id_product." where id_medida=".$id_altura;
-    $resultado = sqlsrv_query($conn,$sql) or die(sqlsrv_error()); 
+    $resultado = sqlsrv_query($conn,$sql); 
     return $resultado;
 
     }   
@@ -54,15 +54,18 @@ function actualizarmedida($altura,$id_product,$id_altura){
 
    function mostrarorden($idcliente,$fechaingreso,$fechafinal){
     $conn = BaseDatos::getCon();
-    $sql = "select * from orden
-    where fecha_orden between '".$fechaingreso."' and '".$fechafinal."' and cliente_id_cliente=".$idcliente;
-    $resultado = sqlsrv_query($conn,$sql) or die(sqlsrv_error()); 
+    $sql = "select o.id_orden, o.ord_nombre, o.ord_nombreclie, est.estado  from orden as o
+        inner join estado_orden as est on est.id_estado = o.estado_id_estado
+        where fecha_orden between '".$fechaingreso."' and '".$fechafinal."' and cliente_id_cliente=".$idcliente;
+    $resultado = sqlsrv_query($conn,$sql); 
     $fila = sqlsrv_fetch_array($resultado,SQLSRV_FETCH_ASSOC);
        
-    return [
-        $fila['cliente_id_cliente'],
-        $fila['ord_destino']
-    ];
+   return [
+        $fila['id_orden'],
+        $fila['ord_nombre'],
+        $fila['ord_nombreclie'],
+        $fila['estado']
+    ]; 
 }  
 
 

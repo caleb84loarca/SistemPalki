@@ -107,15 +107,14 @@ $_SESSION['idusuario'];
 
 
                                 </form>
-
-
                             </div>
+
                             <div id="step-22">
                                 <h2 class="StepTitle">Paso 2 </h2>
                                 <!-- DIVISION PARA LA TABLA Y CARGA DE DATOS -->
                                 <span class="section">Visualizar Datos</span>
                                 <div class="right_col" role="main">
-                                    <div class="">
+                                    
                                         <div class="page-title">
                                             <div class="title_left">
 
@@ -124,7 +123,7 @@ $_SESSION['idusuario'];
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12" align="center" id="EspacioTabla">
+                                            <div class="col-lg-12 col-sm-12" id="EspacioTabla">
                                                 <!--    <div class="x_panel" id="EspacioTabla">
 
                                                     
@@ -132,7 +131,7 @@ $_SESSION['idusuario'];
                                                 </div> -->
                                             </div>
                                         </div>
-                                    </div>
+                                    
                                 </div>
 
                             </div>
