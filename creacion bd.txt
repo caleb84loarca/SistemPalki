@@ -1,0 +1,597 @@
+-- Generado por Oracle SQL Developer Data Modeler 20.2.0.167.1538
+--   en:        2023-01-10 21:12:46 CST
+--   sitio:      SQL Server 2012
+--   tipo:      SQL Server 2012
+
+
+
+CREATE TABLE Bitacora 
+    (
+     Id_bitacora INTEGER NOT NULL , 
+     Observaciones VARCHAR (250) , 
+     Fecha_movimiento DATETIME , 
+     Usuario_Id_usuario INTEGER NOT NULL 
+    )
+GO
+
+ALTER TABLE Bitacora ADD CONSTRAINT Bitacora_PK PRIMARY KEY CLUSTERED (Id_bitacora, Usuario_Id_usuario)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Cliente 
+    (
+     Id_cliente INTEGER NOT NULL , 
+     Clien_nom1 VARCHAR (30) NOT NULL , 
+     Clien_nom2 VARCHAR (30) , 
+     Clien_ape1 VARCHAR (30) NOT NULL , 
+     Clien_ape2 VARCHAR (30) , 
+     Clien_compania VARCHAR (50) , 
+     Clien_direccion VARCHAR (50) , 
+     Clien_correo VARCHAR (50) NOT NULL , 
+     Clien_tel1 VARCHAR (30) , 
+     Clien_tel2 VARCHAR (30) , 
+     Clien_tel3 VARCHAR (30) , 
+     Pais_Id_pais VARCHAR (2) NOT NULL , 
+     Fecha_ingreso DATETIME 
+    )
+GO
+
+ALTER TABLE Cliente ADD CONSTRAINT Cliente_PK PRIMARY KEY CLUSTERED (Id_cliente)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Despacho_Det_Orden 
+    (
+     Id_Det_Despacho INTEGER NOT NULL , 
+     Cantidad_Despacho INTEGER , 
+     Id_Orden_Despachada INTEGER NOT NULL , 
+     Orden_Despachada_Orden_Id_orden INTEGER NOT NULL , 
+     Orden_Despacho_Id_Orden_Despacho INTEGER NOT NULL , 
+     Orden_Despacho_Orden_Id_orden INTEGER NOT NULL , 
+     Id_Orden_Despacho INTEGER NOT NULL , 
+     Id_orden INTEGER NOT NULL 
+    )
+GO
+
+ALTER TABLE Despacho_Det_Orden ADD CONSTRAINT Despacho_detalle_orden_PK PRIMARY KEY CLUSTERED (Id_Det_Despacho, Id_Orden_Despachada, Orden_Despachada_Orden_Id_orden)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Detalle_Orden 
+    (
+     Id_detalleOrden INTEGER NOT NULL , 
+     Cantidad_Unidades INTEGER , 
+     Producto_Id_producto INTEGER NOT NULL , 
+     Estado INTEGER 
+    )
+GO
+
+ALTER TABLE Detalle_Orden ADD CONSTRAINT Detalle_Orden_PK PRIMARY KEY CLUSTERED (Id_detalleOrden)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Embarque 
+    (
+     Id_embarque INTEGER NOT NULL , 
+     Embarque VARCHAR (20) , 
+     Orden_Id_orden INTEGER NOT NULL 
+    )
+GO 
+
+    
+
+
+CREATE UNIQUE NONCLUSTERED INDEX 
+    Embarque__IDX ON Embarque 
+    ( 
+     Orden_Id_orden 
+    ) 
+GO
+
+ALTER TABLE Embarque ADD CONSTRAINT Embarque_PK PRIMARY KEY CLUSTERED (Id_embarque)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Empaque 
+    (
+     Id_empaque INTEGER NOT NULL , 
+     Tipo_empaque VARCHAR (30) NOT NULL 
+    )
+GO
+
+ALTER TABLE Empaque ADD CONSTRAINT Empaque_PK PRIMARY KEY CLUSTERED (Id_empaque)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Estado_Orden 
+    (
+     Id_estado INTEGER NOT NULL , 
+     Estado VARCHAR (15) NOT NULL , 
+     Orden_Id_orden INTEGER NOT NULL 
+    )
+GO 
+
+    
+
+
+CREATE UNIQUE NONCLUSTERED INDEX 
+    Estado_Orden__IDX ON Estado_Orden 
+    ( 
+     Orden_Id_orden 
+    ) 
+GO
+
+ALTER TABLE Estado_Orden ADD CONSTRAINT Estado_Orden_PK PRIMARY KEY CLUSTERED (Id_estado)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Medida 
+    (
+     Id_medida INTEGER NOT NULL , 
+     Medida VARCHAR (10) NOT NULL , 
+     Producto_Id_producto INTEGER 
+    )
+GO
+
+ALTER TABLE Medida ADD CONSTRAINT Medida_PK PRIMARY KEY CLUSTERED (Id_medida)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Orden 
+    (
+     Id_orden INTEGER NOT NULL , 
+     Ord_nombre VARCHAR (30) NOT NULL , 
+     wk_despacho INTEGER , 
+     wk_arribo INTEGER , 
+     Fecha_orden DATETIME , 
+     Fecha_ordcliente DATETIME , 
+     Cliente_Id_cliente INTEGER NOT NULL , 
+     Usuario_Id_usuario INTEGER NOT NULL , 
+     Detalle_Orden_Id_detalleOrden INTEGER , 
+     Ord_nombreclie VARCHAR (30) NOT NULL , 
+     Ord_destino VARCHAR (60) , 
+     Observaciones VARCHAR (255) 
+    )
+GO 
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'semana en la cual llegara el producto' , 'USER' , 'dbo' , 'TABLE' , 'Orden' , 'COLUMN' , 'wk_arribo' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'cuando se ingreso la orden' , 'USER' , 'dbo' , 'TABLE' , 'Orden' , 'COLUMN' , 'Fecha_orden' 
+GO
+
+ALTER TABLE Orden ADD CONSTRAINT Orden_PK PRIMARY KEY CLUSTERED (Id_orden)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Orden_Despacho 
+    (
+     Id_Orden_Despacho INTEGER NOT NULL , 
+     Wk_Despacho INTEGER , 
+     Wk_Arribo INTEGER , 
+     Orden_Id_orden INTEGER NOT NULL , 
+     Fecha_ETD DATE , 
+     Fecha_ETA DATE , 
+     Id_Orden_Despacho2 INTEGER NOT NULL , 
+     Orden_Id_orden2 INTEGER NOT NULL 
+    )
+GO
+
+ALTER TABLE Orden_Despacho ADD CONSTRAINT Orden_Despachada_PK PRIMARY KEY CLUSTERED (Id_Orden_Despacho, Orden_Id_orden)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Pais 
+    (
+     Id_pais VARCHAR (2) NOT NULL , 
+     Nombre_pais VARCHAR (30) 
+    )
+GO
+
+ALTER TABLE Pais ADD CONSTRAINT Pais_PK PRIMARY KEY CLUSTERED (Id_pais)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Producto 
+    (
+     Id_producto INTEGER NOT NULL , 
+     Producto VARCHAR (20) NOT NULL , 
+     Categoria VARCHAR (50) , 
+     Genero VARCHAR (50) , 
+     Especie VARCHAR (50) , 
+     Sub_categoria VARCHAR (50) , 
+     Cites_descripcion VARCHAR (50) , 
+     Cant_minima INTEGER , 
+     Wk_transito INTEGER , 
+     Wk_compra INTEGER , 
+     Empaque_Id_empaque INTEGER NOT NULL 
+    )
+GO
+
+ALTER TABLE Producto ADD CONSTRAINT Producto_PK PRIMARY KEY CLUSTERED (Id_producto)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Reclamos 
+    (
+     Id_reclamo INTEGER NOT NULL , 
+     Reclamo NVARCHAR (250) , 
+     Orden_Id_orden INTEGER NOT NULL , 
+     cantidad_reclamada FLOAT (2) , 
+     id_producto INTEGER , 
+     id_medida INTEGER 
+    )
+GO
+
+ALTER TABLE Reclamos ADD CONSTRAINT Reclamos_PK PRIMARY KEY CLUSTERED (Id_reclamo)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE SubCliente 
+    (
+     Id_subcliente INTEGER NOT NULL , 
+     Nom_subcliente VARCHAR (50) NOT NULL , 
+     Cliente_Id_cliente INTEGER NOT NULL 
+    )
+GO
+
+ALTER TABLE SubCliente ADD CONSTRAINT SubCliente_PK PRIMARY KEY CLUSTERED (Id_subcliente)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Subestado_orden 
+    (
+     Id_subestadorden INTEGER NOT NULL , 
+     Subtipo_estado VARCHAR (40) , 
+     Estado_Orden_Id_estado INTEGER NOT NULL 
+    )
+GO 
+
+    
+
+
+CREATE UNIQUE NONCLUSTERED INDEX 
+    Subestado_orden__IDX ON Subestado_orden 
+    ( 
+     Estado_Orden_Id_estado 
+    ) 
+GO
+
+ALTER TABLE Subestado_orden ADD CONSTRAINT Subestado_orden_PK PRIMARY KEY CLUSTERED (Id_subestadorden)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Tipo_usario 
+    (
+     Id_tipousuario INTEGER NOT NULL , 
+     Tipo_usuario VARCHAR (35) NOT NULL 
+    )
+GO
+
+ALTER TABLE Tipo_usario ADD CONSTRAINT Tipo_usario_PK PRIMARY KEY CLUSTERED (Id_tipousuario)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Usuario 
+    (
+     Id_usuario INTEGER NOT NULL , 
+     Nombre1 VARCHAR (30) NOT NULL , 
+     Nombre2 VARCHAR (30) , 
+     Apellido1 VARCHAR (30) NOT NULL , 
+     Apellido2 VARCHAR (30) , 
+     Puesto VARCHAR (30) , 
+     contrasena VARCHAR (255) , 
+     Tipo_usario_Id_tipousuario INTEGER NOT NULL 
+    )
+GO
+
+ALTER TABLE Usuario ADD CONSTRAINT Usuario_PK PRIMARY KEY CLUSTERED (Id_usuario)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+ALTER TABLE Bitacora 
+    ADD CONSTRAINT Bitacora_Usuario_FK FOREIGN KEY 
+    ( 
+     Usuario_Id_usuario
+    ) 
+    REFERENCES Usuario 
+    ( 
+     Id_usuario 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Cliente 
+    ADD CONSTRAINT Cliente_Pais_FK FOREIGN KEY 
+    ( 
+     Pais_Id_pais
+    ) 
+    REFERENCES Pais 
+    ( 
+     Id_pais 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Despacho_Det_Orden 
+    ADD CONSTRAINT Despacho_Det_Orden_Orden_Despacho_FK FOREIGN KEY 
+    ( 
+     Orden_Despacho_Id_Orden_Despacho, 
+     Orden_Despacho_Orden_Id_orden
+    ) 
+    REFERENCES Orden_Despacho 
+    ( 
+     Id_Orden_Despacho , 
+     Orden_Id_orden 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Despacho_Det_Orden 
+    ADD CONSTRAINT Despacho_detalle_orden_Orden_Despachada_FK FOREIGN KEY 
+    ( 
+     Id_Orden_Despachada, 
+     Orden_Despachada_Orden_Id_orden
+    ) 
+    REFERENCES Orden_Despacho 
+    ( 
+     Id_Orden_Despacho , 
+     Orden_Id_orden 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Detalle_Orden 
+    ADD CONSTRAINT Detalle_Orden_Producto_FK FOREIGN KEY 
+    ( 
+     Producto_Id_producto
+    ) 
+    REFERENCES Producto 
+    ( 
+     Id_producto 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Embarque 
+    ADD CONSTRAINT Embarque_Orden_FK FOREIGN KEY 
+    ( 
+     Orden_Id_orden
+    ) 
+    REFERENCES Orden 
+    ( 
+     Id_orden 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Estado_Orden 
+    ADD CONSTRAINT Estado_Orden_Orden_FK FOREIGN KEY 
+    ( 
+     Orden_Id_orden
+    ) 
+    REFERENCES Orden 
+    ( 
+     Id_orden 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Medida 
+    ADD CONSTRAINT Medida_Producto_FK FOREIGN KEY 
+    ( 
+     Producto_Id_producto
+    ) 
+    REFERENCES Producto 
+    ( 
+     Id_producto 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Orden 
+    ADD CONSTRAINT Orden_Cliente_FK FOREIGN KEY 
+    ( 
+     Cliente_Id_cliente
+    ) 
+    REFERENCES Cliente 
+    ( 
+     Id_cliente 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Orden_Despacho 
+    ADD CONSTRAINT Orden_Despachada_Orden_FK FOREIGN KEY 
+    ( 
+     Orden_Id_orden
+    ) 
+    REFERENCES Orden 
+    ( 
+     Id_orden 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Orden_Despacho 
+    ADD CONSTRAINT Orden_Despacho_Orden_FK FOREIGN KEY 
+    ( 
+     Orden_Id_orden2
+    ) 
+    REFERENCES Orden 
+    ( 
+     Id_orden 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Orden 
+    ADD CONSTRAINT Orden_Detalle_Orden_FK FOREIGN KEY 
+    ( 
+     Detalle_Orden_Id_detalleOrden
+    ) 
+    REFERENCES Detalle_Orden 
+    ( 
+     Id_detalleOrden 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Orden 
+    ADD CONSTRAINT Orden_Usuario_FK FOREIGN KEY 
+    ( 
+     Usuario_Id_usuario
+    ) 
+    REFERENCES Usuario 
+    ( 
+     Id_usuario 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Producto 
+    ADD CONSTRAINT Producto_Empaque_FK FOREIGN KEY 
+    ( 
+     Empaque_Id_empaque
+    ) 
+    REFERENCES Empaque 
+    ( 
+     Id_empaque 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Reclamos 
+    ADD CONSTRAINT Reclamos_Orden_FK FOREIGN KEY 
+    ( 
+     Orden_Id_orden
+    ) 
+    REFERENCES Orden 
+    ( 
+     Id_orden 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE SubCliente 
+    ADD CONSTRAINT SubCliente_Cliente_FK FOREIGN KEY 
+    ( 
+     Cliente_Id_cliente
+    ) 
+    REFERENCES Cliente 
+    ( 
+     Id_cliente 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Subestado_orden 
+    ADD CONSTRAINT Subestado_orden_Estado_Orden_FK FOREIGN KEY 
+    ( 
+     Estado_Orden_Id_estado
+    ) 
+    REFERENCES Estado_Orden 
+    ( 
+     Id_estado 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE Usuario 
+    ADD CONSTRAINT Usuario_Tipo_usario_FK FOREIGN KEY 
+    ( 
+     Tipo_usario_Id_tipousuario
+    ) 
+    REFERENCES Tipo_usario 
+    ( 
+     Id_tipousuario 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+
+
+-- Informe de Resumen de Oracle SQL Developer Data Modeler: 
+-- 
+-- CREATE TABLE                            17
+-- CREATE INDEX                             3
+-- ALTER TABLE                             35
+-- CREATE VIEW                              0
+-- ALTER VIEW                               0
+-- CREATE PACKAGE                           0
+-- CREATE PACKAGE BODY                      0
+-- CREATE PROCEDURE                         0
+-- CREATE FUNCTION                          0
+-- CREATE TRIGGER                           0
+-- ALTER TRIGGER                            0
+-- CREATE DATABASE                          0
+-- CREATE DEFAULT                           0
+-- CREATE INDEX ON VIEW                     0
+-- CREATE ROLLBACK SEGMENT                  0
+-- CREATE ROLE                              0
+-- CREATE RULE                              0
+-- CREATE SCHEMA                            0
+-- CREATE SEQUENCE                          0
+-- CREATE PARTITION FUNCTION                0
+-- CREATE PARTITION SCHEME                  0
+-- 
+-- DROP DATABASE                            0
+-- 
+-- ERRORS                                   0
+-- WARNINGS                                 0
