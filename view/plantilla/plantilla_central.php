@@ -3,6 +3,7 @@ session_start();
 $_SESSION['nombre'];
 $_SESSION['apellido'];
 $_SESSION['idusuario'];
+$_SESSION['tipoUsuario'];
 
 if ($_SESSION['nombre'] == null) {
 
@@ -104,9 +105,13 @@ if ($_SESSION['nombre'] == null) {
                   </ul>
                 </li>
 
-
-                <li><a><i class="fa fa-cogs"></i> Mantenimiento <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
+                <?php
+                 if($_SESSION['tipoUsuario']<>1)
+                 {
+                echo "<!--";
+                ?>
+                 <li><a><i class="fa fa-cogs"></i> Mantenimiento <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu"> 
                     <li><a href="new_usuario.php">Usuarios</a></li>
                     <li><a>Clientes<span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
@@ -126,6 +131,10 @@ if ($_SESSION['nombre'] == null) {
                   </ul>
                 </li>
 
+                <?php
+               echo "<!--";
+                  ?>
+
                 <li><a>Empaque<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li class="sub_menu"><a href="new_empaque.php">Nuevo Empaque</a></li>
@@ -134,6 +143,9 @@ if ($_SESSION['nombre'] == null) {
               </ul>
               </li>
 
+              <?php
+               echo "<!--";
+                  ?>
               <li><a>Medidas/Alturas<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li class="sub_menu"><a href="new_medida.php">Nueva Medida/Altura</a></li>
@@ -141,6 +153,52 @@ if ($_SESSION['nombre'] == null) {
               </li>
               </ul>
               </li>
+              <?php         
+            
+                 }else{ 
+                  ?>                
+                <li><a><i class="fa fa-cogs"></i> Mantenimiento <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu"> 
+                    <li><a href="new_usuario.php">Usuarios</a></li>
+                    <li><a>Clientes<span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li class="sub_menu"><a href="new_cliente.php">Nuevo Ingreso</a>
+                        </li>
+                        <li><a href="#level2_1">Nuevo SubCliente</a>
+                        </li>
+                        <li><a href="#level2_2">Asignacion de Subcliente</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a>Productos<span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li class="sub_menu"><a href="new_producto.php">Nuevo Producto</a></li>
+                        <!-- <li class="sub_menu"><a href="modif_producto.php">Modificar Producto</a></li> -->
+                    </li>
+                  </ul>
+                </li>
+
+
+                <li><a>Empaque<span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li class="sub_menu"><a href="new_empaque.php">Nuevo Empaque</a></li>
+                    <!--   <li class="sub_menu"><a href="modif_empaque.php">Modificar Empaque</a></li> -->
+                </li>
+              </ul>
+              </li>
+
+            
+              <li><a>Medidas/Alturas<span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li class="sub_menu"><a href="new_medida.php">Nueva Medida/Altura</a></li>
+                  <!--   <li class="sub_menu"><a href="modif_empaque.php">Modificar Empaque</a></li> -->
+              </li>
+              </ul>
+              </li>
+
+                <?php
+                 } 
+                 ?>
 
 
          

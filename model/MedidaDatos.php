@@ -1,12 +1,11 @@
 <?php
  require_once "../controllers/BaseDatos.php"; 
 
- $medida=$_POST['medida'];
- $producto=$_POST['idproducto'];   
-
  
 if( isset($medida) && isset($producto) ){
 
+    $medida=$_POST['medida'];
+    $producto=$_POST['idproducto'];   
     aniadir($medida,$producto);
 
    print "<script> alert('Medida Ingresada Exitosamente!!'); window.location='../view/new_medida.php'; </script>";
@@ -28,11 +27,13 @@ function aniadir($dato,$dato2){
 //metodo de actualizar medida
 
 
-$altura=$_POST['altura'];   
- $idproduct=$_POST['idproduct'];   
- $idaltura=$_POST['idaltura'];
+
  
 if( isset($altura) && isset($idaltura) ){
+
+    $altura=$_POST['altura'];   
+    $idproduct=$_POST['idproduct'];   
+    $idaltura=$_POST['idaltura'];
 
     actualizarmedida($altura,$idproduct,$idaltura);
 
