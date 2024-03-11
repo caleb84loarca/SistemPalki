@@ -23,14 +23,28 @@
 
     $base = new BaseDatos();
     $conexion = $base->getCon();
-    $query = "select o.ord_nombre, p.producto, m.medida, format(do.cantidad_unidades,'#,0') as cantidad_unidades, format(ddo.cantidad_despacho,'#,0') as cantidad_despacho, 
-format(sum(do.cantidad_unidades -ddo.cantidad_despacho),'#,0') as saldo from orden as o
+    $query = "select tabla.ord_nombre, tabla.producto, tabla.medida, format(tabla.cantidad_unidades,'#,0') as cantidad_unidades,
+    FORMAT(
+        case 
+	        when tabla.cantidad_despacho is null then 0	else tabla.cantidad_despacho 
+        end,'#,0') as cantidad_despacho,
+    FORMAT(
+        case 
+	        when cantidad_despacho = '0' or cantidad_despacho is null then tabla.cantidad_unidades
+	        else
+	        ( cast( tabla.cantidad_unidades as int) -  cast(tabla.cantidad_despacho as int)) 
+        end, '#,0') as saldo
+from ( select o.ord_nombre, p.producto, m.medida, do.cantidad_unidades as cantidad_unidades,
+(select SUM(cantidad_despacho) 
+		from despacho_det_orden 
+		where id_orden= $idOrden 
+		and id_producto=p.id_producto 
+		and idmedida=m.id_medida) as [cantidad_despacho]
+from orden as o
 inner join detalle_orden as do on do.orden_id_orden=o.id_orden
-inner join despacho_det_orden as ddo on ddo.id_orden = o.id_orden
 inner join producto as p on p.id_producto = do.producto_id_producto
 inner join medida as m on m.id_medida=do.medida_id_medida
-WHERE o.id_orden = $idOrden
-group by o.ord_nombre, p.producto, m.medida, do.cantidad_unidades, ddo.cantidad_despacho ";
+WHERE o.id_orden = $idOrden) as tabla ";
     $resultado = sqlsrv_query($conexion, $query);
 
     while ($fila = sqlsrv_fetch_array($resultado)) {

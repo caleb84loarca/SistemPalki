@@ -113,7 +113,7 @@ $_SESSION['idusuario'];
                                 <h2 class="StepTitle">Paso 2 </h2>
                                 <!-- DIVISION PARA LA TABLA Y CARGA DE DATOS -->
                                 <span class="section">Visualizar Datos</span>
-                                <div class="right_col" role="main">
+                                <div class="center_col" role="main">
                                     
                                         <div class="page-title">
                                             <div class="title_left">
